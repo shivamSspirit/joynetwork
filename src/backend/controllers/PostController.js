@@ -64,7 +64,9 @@ export const getAllUserPostsHandler = function (schema, request) {
  * */
 
 export const createPostHandler = function (schema, request) {
+  console.log('legend')
   const user = requiresAuth.call(this, request);
+  console.log('user',user)
   try {
     if (!user) {
       return new Response(
@@ -78,9 +80,11 @@ export const createPostHandler = function (schema, request) {
       );
     }
     const { postData } = JSON.parse(request.requestBody);
+    console.log('postdat',postData)
+    const content = postData
     const post = {
       _id: uuid(),
-      ...postData,
+      content,
       likes: {
         likeCount: 0,
         likedBy: [],

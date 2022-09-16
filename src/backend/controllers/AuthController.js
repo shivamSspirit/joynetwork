@@ -16,6 +16,8 @@ const sign = require("jwt-encode");
 
 export const signupHandler = function (schema, request) {
   const { username, password, ...rest } = JSON.parse(request.requestBody);
+  console.log('restt',rest)
+  console.log("username",username)
   try {
     // check if username already exists
     const foundUser = schema.users.findBy({ username: username });
@@ -46,6 +48,7 @@ export const signupHandler = function (schema, request) {
       { _id, username },
       process.env.REACT_APP_JWT_SECRET
     );
+    this.db.users.insert(createdUser)
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(
