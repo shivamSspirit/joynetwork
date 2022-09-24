@@ -9,8 +9,18 @@ import Suggestions from "../components/mainPage/suggestions";
 import Header from "../components/header/header";
 import MainComponent from "../components/mainPage/mainComponent";
 import LandingPage from "../themes/landingPage";
-import Hello from "../themes/Hello";
 import * as authCookies from '../utils/authUtils'
+
+// import MainComponent from "../components/mainPage/mainComponent";
+
+import PostComment from "../components/postComment/postcomment";
+
+
+import LoginPage from "../themes/loginPage";
+import SignupPage from "../themes/signupPage";
+
+import ProfilePage from "../themes/profilePage";
+
 
 function AllRoutes() {
 
@@ -34,8 +44,11 @@ function AllRoutes() {
             <Router>
                 <Routes>
                     <Route exact path="/" element={<LandingPage />} />
-                    <Route exact path="/auth/login" element={<Login />} />
-                    <Route exact path="/auth/signup" element={<SignUp />} />
+                    <Route exact path="/auth/login" element={<LoginPage />} />
+                    <Route exact path="/auth/signup" element={<SignupPage />} />
+                    <Route exact path="/post/:postId" element={<MainComponent/>}/>
+
+                    <Route exact path="/profile" element={<ProfilePage/>}/>
                     {/* {token ? <Route exact path="/" element={<LandingPage />} /> : <Route exact path="/auth/login" element={<Login />} />} */}
                     {/* <Route exact path="/ok" element={<Hello/>}/> */}
                 </Routes>

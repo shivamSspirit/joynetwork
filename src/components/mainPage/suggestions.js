@@ -11,7 +11,6 @@ function Suggestions({ users }) {
         dispatch(followActions?.followSomeone(userId, () => {
             console.log('follow user with this id')
         }))
-        console.log('state', state)
     }
 
     return (

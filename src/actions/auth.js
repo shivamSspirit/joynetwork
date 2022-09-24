@@ -1,10 +1,12 @@
 import * as authApis from '../apis/auth'
 import * as AuthUtils from '../utils/authUtils'
 
+
+
+
 export function register(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.register(data);
-		console.log('res from register', response)
 		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.createdUser?.username)
 		if (callback) {
@@ -17,7 +19,6 @@ export function register(data, callback) {
 export function login(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.login(data);
-		console.log('log', response)
 		AuthUtils?.saveAuthCookie(response?.data["encodedToken"])
 		AuthUtils?.saveUserCookie(response?.data?.foundUser?.username)
 		dispatch(setUserData(response?.data?.foundUser))

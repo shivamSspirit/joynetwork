@@ -25,6 +25,10 @@
     backdrop-filter: blur(100px); */
   }
 
+  .signup-height{
+    height:calc(70% - 120px);
+  }
+
   .brand-logo {
     background: linear-gradient(180deg, rgba(98, 106, 136, 0.1) 0%, #333333 100%);
     backdrop-filter: blur(100px);

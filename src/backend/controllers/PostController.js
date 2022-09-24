@@ -239,7 +239,10 @@ export const dislikePostHandler = function (schema, request) {
     );
     post.likes.dislikedBy.push(user);
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
+   
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+
+    console.log('posfrom dvbt',this.db.posts )
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -295,3 +298,28 @@ export const deletePostHandler = function (schema, request) {
     );
   }
 };
+
+
+// this is in controllers
+
+// export const getPagedVideos = function (schema,request) {
+//   const { pageNum } = request.params;
+//   // console.log('rew',request)
+//   const latestVideos =this.db.videos
+//   console.log('la',latestVideos)
+//   const paginatedVideos = latestVideos.slice(0, pageNum * 2 + 2);
+//   return new Response(200, {}, { videos: paginatedVideos })
+// }
+
+
+// this in context
+
+// useEffect(()=>{
+	// 	const fetchPagedVideos = async()=>{
+	// 		const response = await VideoApi?.getPagesVideos(2);
+	// 		if(response){
+	// 			console.log('datqa from paged',response?.data)
+	// 		}
+	// 	}
+	// 	fetchPagedVideos()
+	// },[])

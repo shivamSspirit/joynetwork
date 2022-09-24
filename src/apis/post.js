@@ -2,7 +2,6 @@ import axios from "axios";
 import * as authFeatures from '../utils/authUtils'
 
 const secondaryBaseUrl = '/api/posts'
-
 const authorization = authFeatures?.getAuthCookie()
 
 // public
@@ -40,7 +39,6 @@ export async function getAllpostFromuser(username) {
 // private
 
 export async function postSinglePost(postData) {
-    console.log( 'from api',postData )
     try {
         const response = await axios.post(`${secondaryBaseUrl}`, { postData }, { headers: { authorization: authFeatures?.getAuthCookie() } })
         console.log('res',response)

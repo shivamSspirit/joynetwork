@@ -40,7 +40,7 @@ function SignUp() {
         <div>
             <div className='container flex h-screen w-screen items-center justify-center'>
 
-                <div className='bg-green w-1/4 h-1/2 flex flex-col items-center'>
+                <div className='bg-green w-1/4 flex flex-col items-center signup-height'>
 
                     <div className=''>
                         <h2 className=''>Signup to webapp</h2>
@@ -95,12 +95,10 @@ function SignUp() {
 
                         <button type='submit' className='rounded-none'>Register</button>
                     </form>
-
                     {/* 
         <div className='guest-log items-center'>
             <button onClick={(e) => asGuest(e)}>Login as a guest</button>
         </div> */}
-
                     <div className='item-center'>
                         <span>already sign up?<Link to={'/auth/login'} style={{ textDecoration: "none", color: "inherit" }}>login here</Link></span>
                     </div>
