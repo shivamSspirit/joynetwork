@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // import * as postActions from '../../actions/post'
 import Postmenuicon from '../../assest/dots.png'
-import ModalforAction from '../modal'
+import ModalforAction from '../modals/modal'
 
 import { Link } from 'react-router-dom'
 

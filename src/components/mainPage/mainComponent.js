@@ -12,7 +12,7 @@ import * as postActions from '../../actions/post'
 import * as userActions from '../../actions/user'
 import * as authActions from '../../actions/auth'
 import * as authCookies from '../../utils/authUtils'
-import ModalforAction from '../modal'
+import ModalforAction from '../modals/modal'
 
 import PostComment from '../postComment/postcomment'
 import SideBar from './sidebar'

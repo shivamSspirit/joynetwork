@@ -7,10 +7,13 @@ import { useLocation } from 'react-router-dom'
 import * as likedislike from '../../actions/likedislike'
 import * as bookmarkActions from '../../actions/bookmark'
 
+import  useModal  from '../../hoooks/useModal'
+
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
-    const location = useLocation()
+    const location = useLocation();
+    const {modelOperation} = useModal()
 
     console.log('current location',location.pathname)
 
@@ -80,7 +83,7 @@ function ProfileComponent() {
                         </div>
                     </div>
                     <div>
-                        <button className='w-28 h-9 bg-gray-dark text-white'>Edit profile</button>
+                        <button onClick={modelOperation} className='w-28 h-9 bg-gray-dark text-white'>Edit profile</button>
                     </div>
                 </div>
             </div>
