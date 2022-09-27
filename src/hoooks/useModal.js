@@ -2,13 +2,13 @@ import { useState } from "react";
 
 function useModal() {
     const [modal, setModal] = useState(false);
-    const modelOperation = () => {
-        console.log('modal', modal)
+    function modelOperation () {
         setModal(!modal)
     }
     return {
         modelOperation,
-        modal
+        modal,
+        setModal
     }
 }
 

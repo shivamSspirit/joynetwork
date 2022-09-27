@@ -7,17 +7,19 @@ import { useLocation } from 'react-router-dom'
 import * as likedislike from '../../actions/likedislike'
 import * as bookmarkActions from '../../actions/bookmark'
 
-import  useModal  from '../../hoooks/useModal'
+import ProfileModal from '../modals/profileModal'
+
+import useModal from '../../hoooks/useModal'
 
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
     const location = useLocation();
-    const {modelOperation} = useModal()
+    const { modal, modelOperation } = useModal()
 
-    console.log('current location',location.pathname)
+    console.log('current location', location.pathname)
 
-    console.log("state fromm profile",state)
+    console.log("state fromm profile", state)
 
     const dispatch = useDispatch()
 
@@ -92,9 +94,9 @@ function ProfileComponent() {
             <div className='w-full flex flex-row gap-9 justify-center'>
                 <div className='w-1/2 flex gap-8 justify-center'>
                     <Link to='/profile' className='cursor-pointer'>Posts</Link>
-                     <Link to='/profile/follower' className='cursor-pointer'>Followers</Link>
+                    <Link to='/profile/follower' className='cursor-pointer'>Followers</Link>
                     <Link to='/profile/following' className='cursor-pointer'>Following</Link>
-                </div> 
+                </div>
             </div>
 
 
@@ -120,7 +122,7 @@ function ProfileComponent() {
                                             </div>
                                             <p className='text-left about post'>{post?.content?.content?.status}</p>
                                             {post?.content?.content?.postMedia && (
-                                                  <img src={`${post?.content?.content?.postMedia}`} className='w-full max-h-full' alt='postImage' />
+                                                <img src={`${post?.content?.content?.postMedia}`} className='w-full max-h-full' alt='postImage' />
                                             )}
                                         </div>
                                         <div className='icons flex space-x-20'>
@@ -140,6 +142,8 @@ function ProfileComponent() {
                     ))}
                 </div>
             </div>
+
+            {modal && <ProfileModal />}
         </>
     )
 }
