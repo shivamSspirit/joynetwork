@@ -20,6 +20,9 @@ import LoginPage from "../themes/loginPage";
 import SignupPage from "../themes/signupPage";
 import ProfilePage from "../themes/profilePage";
 
+import FollowersComponent from '../components/profile/Followers'
+import Follwingcomponent from '../components/profile/Following'
+
 
 function AllRoutes() {
 
@@ -45,10 +48,11 @@ function AllRoutes() {
                     <Route exact path="/" element={<LandingPage />} />
                     <Route exact path="/auth/login" element={<LoginPage />} />
                     <Route exact path="/auth/signup" element={<SignupPage />} />
-                    <Route exact path="/post/:postId" element={<MainComponent/>}/>
-                    <Route exact path="/profile" element={<ProfilePage/>}/>
-                    {/* {token ? <Route exact path="/" element={<LandingPage />} /> : <Route exact path="/auth/login" element={<Login />} />} */}
-                    {/* <Route exact path="/ok" element={<Hello/>}/> */}
+                    <Route exact path="/post/:postId" element={<MainComponent />} />
+                    <Route exact path="/profile" element={<ProfilePage />} >
+                        <Route  path="follower" element={<FollowersComponent />} />
+                        <Route  path="following" element={<Follwingcomponent />} />
+                    </Route>
                 </Routes>
             </Router>
         </div>

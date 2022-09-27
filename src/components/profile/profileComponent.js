@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../mainPage/sidebar'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import * as likedislike from '../../actions/likedislike'
 import * as bookmarkActions from '../../actions/bookmark'
@@ -8,6 +10,9 @@ import * as bookmarkActions from '../../actions/bookmark'
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
+    const location = useLocation()
+
+    console.log('current location',location.pathname)
 
     console.log("state fromm profile",state)
 
@@ -80,13 +85,13 @@ function ProfileComponent() {
                 </div>
             </div>
 
-            
+
             <div className='w-full flex flex-row gap-9 justify-center'>
                 <div className='w-1/2 flex gap-8 justify-center'>
-                    <span className='cursor-pointer'>Posts</span>
-                    <span className='cursor-pointer'>Followers</span>
-                    <span className='cursor-pointer'>Following</span>
-                </div>
+                    <Link to='/profile' className='cursor-pointer'>Posts</Link>
+                     <Link to='/profile/follower' className='cursor-pointer'>Followers</Link>
+                    <Link to='/profile/following' className='cursor-pointer'>Following</Link>
+                </div> 
             </div>
 
 
@@ -113,15 +118,6 @@ function ProfileComponent() {
                                             <p className='text-left about post'>{post?.content?.content?.status}</p>
                                             {post?.content?.content?.postMedia && (
                                                   <img src={`${post?.content?.content?.postMedia}`} className='w-full max-h-full' alt='postImage' />
-                                                // <div className='imgBlock container w-full h-4/5'>
-                                                //     {console.log('val', post?.content?.media.includes('image'))}
-                                                //     {post?.content?.media.includes('image') && (
-                                                //         <img src={`${post?.content?.media}`} className='w-full max-h-full' alt='postImage' />
-                                                //     )}
-                                                //     {post?.content?.media.includes('video') && (
-                                                //         <video controls loop className='w-full max-h-full' src={post?.content?.media} />
-                                                //     )}
-                                                // </div>
                                             )}
                                         </div>
                                         <div className='icons flex space-x-20'>
