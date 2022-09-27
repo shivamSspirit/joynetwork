@@ -17,11 +17,13 @@ function CreatePost() {
         await uploadFiles(e.target.files[0], setMediaURL, setOpa, setDeleteToken)
     }
 
+
+
     const handlecreatePost = async(e) => {
         e.preventDefault();
         let postData;
         if (mediaUrl || status) {
-            postData = { status: status, media: mediaUrl }
+            postData = {content:{status:status, postMedia:mediaUrl}}
            await dispatch(postActions?.createPost(postData, () => {
                 console.log('createing post')
             }))

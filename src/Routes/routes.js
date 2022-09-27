@@ -18,7 +18,6 @@ import PostComment from "../components/postComment/postcomment";
 
 import LoginPage from "../themes/loginPage";
 import SignupPage from "../themes/signupPage";
-
 import ProfilePage from "../themes/profilePage";
 
 
@@ -47,7 +46,6 @@ function AllRoutes() {
                     <Route exact path="/auth/login" element={<LoginPage />} />
                     <Route exact path="/auth/signup" element={<SignupPage />} />
                     <Route exact path="/post/:postId" element={<MainComponent/>}/>
-
                     <Route exact path="/profile" element={<ProfilePage/>}/>
                     {/* {token ? <Route exact path="/" element={<LandingPage />} /> : <Route exact path="/auth/login" element={<Login />} />} */}
                     {/* <Route exact path="/ok" element={<Hello/>}/> */}

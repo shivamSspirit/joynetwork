@@ -12,14 +12,6 @@ export const likePostReducer = (state = like_posts_state, action) => {
             };
         }
 
-        // case "SET_POSTS_OF_USER": {
-        //     return {
-        //         ...state,
-        //         posts: state?.posts,
-        //         userPosts: action?.userPosts
-        //     }
-        // }
-
 
         default:
             return state;

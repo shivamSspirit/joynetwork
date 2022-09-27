@@ -9,6 +9,7 @@ export function register(data, callback) {
 		const response = await authApis.register(data);
 		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.createdUser?.username)
+		dispatch(setNewUser(response?.data?.createdUser))
 		if (callback) {
 			return callback();
 		}
@@ -33,6 +34,12 @@ export function logout(){
 	window.location = '/auth/login'
 }
 
+export function setNewUser(newUser){
+	return {
+		type:"SET_NEW_USER",
+		newUser
+	}
+}
 
 
 export function setUserData(currentUser) {

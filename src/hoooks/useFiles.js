@@ -3,6 +3,8 @@ import { setpostsData } from "../actions/post";
 function useFiles() {
   const uploadFiles = async (media, setMediaURL, setOpa, setDeleteToken) => {
     const mediaType = media?.type?.split("/")[0];
+
+    console.log('midiya tyep',media?.type)
     //   if (mediaType === "video" && Math.round(media.size / 1024000) > 10)
     //     toast.error("Video size should be less than 10MB");
     //   else if (Math.round(media.size / 1024000) > 4)

@@ -9,6 +9,8 @@ function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
 
+    console.log("state fromm profile",state)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -61,15 +63,15 @@ function ProfileComponent() {
                 <div className='flex flex-row w-full justify-evenly'>
                     <div className='profile-side flex flex-col gap-2'>
                         <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
-                        <h2 className='text-left'>User Name</h2>
-                        <h3 className='text-left'>@ user name</h3>
-                        <p className='text-left'>bio developer bio</p>
-                        <p className='text-left'>Website: <span>https://github.com/shivamsoni00</span></p>
+                        <h2 className='text-left'>{`${state?.settings?.currentUser?.firstName} ${state?.settings?.currentUser?.lastName}`}</h2>
+                        <h3 className='text-left'>@{state?.settings?.currentUser?.username}</h3>
+                        <p className='text-left'>{state?.settings?.currentUser?.bio}</p>
+                        <p className='text-left'>Website: <span><a href={`${state?.settings?.currentUser?.githubUrl}`}>{state?.settings?.currentUser?.githubUrl}</a></span></p>
 
                         <div className='flex flex-row gap-3'>
-                            <p><span>51</span>posts</p>
-                            <p><span>51</span>followers</p>
-                            <p><span>51</span>following</p>
+                            <p><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
+                            <p><span>{state?.settings?.currentUser?.followers?.length}</span>followers</p>
+                            <p><span>{state?.settings?.currentUser?.following?.length}</span>following</p>
                         </div>
                     </div>
                     <div>
@@ -77,6 +79,8 @@ function ProfileComponent() {
                     </div>
                 </div>
             </div>
+
+            
             <div className='w-full flex flex-row gap-9 justify-center'>
                 <div className='w-1/2 flex gap-8 justify-center'>
                     <span className='cursor-pointer'>Posts</span>
@@ -106,17 +110,18 @@ function ProfileComponent() {
 
                                                 {/* <span className='flex justify-center items-center'><img onClick={() => setPopup(!popup)} id="open-btn" className='h-6 w-5 mb-4 cursor-pointer' src={Postmenuicon} alt='menu-icon' /></span> */}
                                             </div>
-                                            <p className='text-left about post'>{post?.content?.status}</p>
-                                            {post?.content?.media && (
-                                                <div className='imgBlock container w-full h-4/5'>
-                                                    {console.log('val', post?.content?.media.includes('image'))}
-                                                    {post?.content?.media.includes('image') && (
-                                                        <img src={`${post?.content?.media}`} className='w-full max-h-full' alt='postImage' />
-                                                    )}
-                                                    {post?.content?.media.includes('video') && (
-                                                        <video controls loop className='w-full max-h-full' src={post?.content?.media} />
-                                                    )}
-                                                </div>
+                                            <p className='text-left about post'>{post?.content?.content?.status}</p>
+                                            {post?.content?.content?.postMedia && (
+                                                  <img src={`${post?.content?.content?.postMedia}`} className='w-full max-h-full' alt='postImage' />
+                                                // <div className='imgBlock container w-full h-4/5'>
+                                                //     {console.log('val', post?.content?.media.includes('image'))}
+                                                //     {post?.content?.media.includes('image') && (
+                                                //         <img src={`${post?.content?.media}`} className='w-full max-h-full' alt='postImage' />
+                                                //     )}
+                                                //     {post?.content?.media.includes('video') && (
+                                                //         <video controls loop className='w-full max-h-full' src={post?.content?.media} />
+                                                //     )}
+                                                // </div>
                                             )}
                                         </div>
                                         <div className='icons flex space-x-20'>

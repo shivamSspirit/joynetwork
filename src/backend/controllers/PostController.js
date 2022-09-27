@@ -66,7 +66,7 @@ export const getAllUserPostsHandler = function (schema, request) {
 export const createPostHandler = function (schema, request) {
   console.log('legend')
   const user = requiresAuth.call(this, request);
-  console.log('user',user)
+  console.log('userof post',user)
   try {
     if (!user) {
       return new Response(
@@ -159,6 +159,7 @@ export const editPostHandler = function (schema, request) {
 
 export const likePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
+  console.log('userfrom loke',user)
   try {
     if (!user) {
       return new Response(
