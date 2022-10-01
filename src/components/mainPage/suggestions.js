@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as followActions from '../../actions/followunfollow'
 import { useDispatch, useSelector } from 'react-redux'
 
 function Suggestions({ users }) {
     const dispatch = useDispatch();
+    const [followeduser, setFollowedUser] = useState()
 
-    const { ...state } = useSelector(state => state)
+    // const { state } = useSelector(state => state?.userReducer)
 
-    const followuser = (userId) => {
+    useEffect(()=>{
+        if(users){
+            setFollowedUser(users)
+        }
+    },[users])
+
+    const followuser =  (userId) => {
         dispatch(followActions?.followSomeone(userId, () => {
-            console.log('follow user with this id')
+            setFollowedUser(users.filter(user => user?._id !== userId))
         }))
+
     }
 
     return (
@@ -22,7 +30,7 @@ function Suggestions({ users }) {
                         <p>show more-</p>
                     </div>
                     <ul className='flex flex-col gap-3'>
-                        {users && users?.map((user, idx) => (
+                        {followeduser && followeduser?.map((user, idx) => (
                             <li key={`${idx}`}>
                                 <div className='flex flex-row space-x-3'>
                                     <div className="shrink-0">

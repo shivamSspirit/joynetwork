@@ -12,8 +12,9 @@ export const likePostReducer = (state = like_posts_state, action) => {
             };
         }
 
-
-        default:
-            return state;
+        default: {
+			return state;
+		}
+            
     }
 }

@@ -2,8 +2,9 @@ import { useState } from "react";
 
 function useModal() {
     const [modal, setModal] = useState(false);
-    function modelOperation () {
-        setModal(!modal)
+    async function modelOperation () {
+       await setModal(true)
+        console.log('status:',modal)
     }
     return {
         modelOperation,

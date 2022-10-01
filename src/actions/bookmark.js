@@ -3,6 +3,7 @@ import * as bookmarkApi from '../apis/bookmark'
 export function addPostToBookMark(data, callback) {
     return async (dispatch) => {
         const response = await bookmarkApi?.addpostTouserbookmark(data);
+        console.log("response from boookamrk",response)
         await dispatch(setBookmarkposts(response?.data?.bookmarks))
         if (callback) {
             return callback();

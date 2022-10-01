@@ -27,6 +27,14 @@ function MainComponent() {
   const { currentUser } = useSelector(state => state?.settings)
   const { users } = useSelector(state => state?.userReducer);
 
+  const {likePosts} = useSelector(state=>state?.likePostReducer);
+
+  console.log('like state from main ',likePosts)
+
+  console.log(likePosts?.find(posts=>posts?.likes?.likeCount))
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate()
 

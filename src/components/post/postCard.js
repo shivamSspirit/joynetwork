@@ -10,10 +10,21 @@ import * as bookmarkActions from '../../actions/bookmark'
 import * as likeDislikes from '../../actions/likedislike'
 import { compose } from 'redux'
 
+
+
+
+
 function PostCard({ posts, popup, setPopup }) {
     const { ...state } = useSelector(state => state);
     const dispatch = useDispatch()
 
+
+    const { likePosts } = useSelector(state => state?.likePostReducer);
+    const {bookmarkPosts}  = useSelector(state=>state?.bookmarkPostReducer)
+
+
+    console.log('like state from main ', bookmarkPosts)
+    console.log(likePosts?.find(posts => posts?.likes?.likeCount))
     console.log('posts', state)
 
 
@@ -89,12 +100,13 @@ function PostCard({ posts, popup, setPopup }) {
                                 </div>
                                 <div className='icons flex space-x-20'>
                                     <span>
-                                     {state?.likePostReducer?.likePosts && state?.likePostReducer?.likePosts?.find(posts => posts?.likeCount?.likes !== 0) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} />  :  <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />}
-                           
+                                        {likePosts && likePosts?.find(posts => posts?.likes?.likeCount) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} /> :   <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />}
                                     </span>
                                     <span>
-                                        {state?.postReducer?.userPosts && state?.postReducer?.userPosts?.find(posts => posts?._id === post?._id) ? <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => { removefrombookmark(post?._id) }} /> : <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }} />}
-                                    </span>
+                                    <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  /> 
+                                        </span>
+                                        {/* { bookmarkPosts && bookmarkPosts?.find(posts => posts?.likes?.likeCount)? <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  />: <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => { removefrombookmark(post?._id) }} />}
+                                    </span> */}
                                     <Link to={`/post/${post?._id}`}> <span> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></span></Link>
 
                                     <img className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" onClick={() => handleShareClick(post?._id)} />
