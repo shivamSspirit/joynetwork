@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 function Login() {
     const navigate = useNavigate()
     const formLogin = () => {
-        console.log("Callback function when form is submitted!");
         console.log("Form Values ", values);
     }
     const { values, errors, handleChange, asGuest } = useLoginForm(formLogin)

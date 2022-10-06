@@ -32,19 +32,9 @@ function MainComponent() {
   const { posts, userPosts } = useSelector(state => state?.postReducer);
   const { currentUser } = useSelector(state => state?.settings)
   const { users } = useSelector(state => state?.userReducer);
-
   const { likePosts } = useSelector(state => state?.likePostReducer);
-
   const location = useLocation()
-
-  console.log('like state from main ', likePosts)
-
-  console.log('postidddddd', location)
-
-  console.log(likePosts?.find(posts => posts?.likes?.likeCount))
-
   const { ...postid } = useParams()
-
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -107,43 +97,43 @@ function MainComponent() {
   const ReturnComponentsfromorigin = () => {
     if (location.pathname === '/') {
       return (
-          <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
-            <div className='h-full  overflow-scroll'>
-              <CreatePost />
-              <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
-            </div>
+        <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
+          <div className='h-full  overflow-scroll'>
+            <CreatePost />
+            <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
           </div>
+        </div>
       )
     }
 
     if (location.pathname === '/explore') {
       return (
-          <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
-            <div className='h-full overflow-scroll'>
-              <ExploreFedds />
-            </div>
+        <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
+          <div className='h-full overflow-scroll'>
+            <ExploreFedds />
           </div>
+        </div>
       )
     }
 
-    if(location.pathname==='/likes'){
+    if (location.pathname === '/likes') {
       return (
         <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
           <div className='h-full overflow-scroll'>
-            <Likes/>
+            <Likes />
           </div>
         </div>
-    )
+      )
     }
 
-    if(location.pathname='/bookmarks'){
+    if (location.pathname = '/bookmarks') {
       return (
         <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
           <div className='h-full overflow-scroll'>
-            <Bookmark/>
+            <Bookmark />
           </div>
         </div>
-    )
+      )
     }
 
   }
@@ -152,15 +142,9 @@ function MainComponent() {
     <div className='w-full bg-sky-blue relative h-full' >
       <div className='flex flex-row w-full'>
         <SideBar />
-        
+        <>
           {ReturnComponentsfromorigin()}
-          {/* <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
-            <div className='h-full  overflow-scroll'>
-              <CreatePost />
-              <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
-            </div>
-          </div> */}
-        
+        </>
         <div className='basis-1/4'>
           <Suggestions users={users} />
         </div>

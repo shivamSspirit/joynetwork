@@ -11,21 +11,13 @@ import useModal from '../../hoooks/useModal'
 import ProfileModal from '../modals/profileModal'
 
 
-
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
     const location = useLocation();
     const { modal,modelOperation } = useModal()
     const {currentuserfollwowing,currnetuserfollowers }=useSelector(state=>state?.followerPostReducer)
-    
-
-
-    console.log('current location', location.pathname)
-
-    console.log("state fromm profile", state)
    
-
     const dispatch = useDispatch()
 
     useEffect(() => {

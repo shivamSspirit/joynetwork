@@ -1,20 +1,20 @@
 export const like_posts_state = {
-    likePosts: [],
+    likedbyusers: [],
 };
 
 
 export const likePostReducer = (state = like_posts_state, action) => {
     switch (action.type) {
-        case "SET_LIKE_POSTS": {
+        case "SET_LIKED_BY_POSTS": {
             return {
                 ...state,
-                likePosts: action.likeposts
+                likedbyusers: action.likebyuserposts
             };
         }
 
-        default: {
-			return state;
-		}
+         default: {
+		 	return state;
+		 }
             
     }
 }

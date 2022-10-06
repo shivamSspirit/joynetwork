@@ -31,8 +31,6 @@ export const postReducer = (state = default_posts_state, action) => {
 
             }
         }
-
-
         default:
             return state;
     }

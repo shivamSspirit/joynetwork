@@ -12,9 +12,9 @@ function PostCard({ posts, popup, setPopup }) {
     const { ...state } = useSelector(state => state);
     const dispatch = useDispatch()
     const { ...postid } = useParams()
-
     const { likePosts } = useSelector(state => state?.likePostReducer);
     const { bookmarkPosts } = useSelector(state => state?.bookmarkPostReducer)
+
 
     const likeposts = async (postId) => {
         await dispatch(likeDislikes?.likePost(postId, () => {
@@ -47,6 +47,14 @@ function PostCard({ posts, popup, setPopup }) {
         );
     };
 
+    const isLikedPost=(user,likes)=>{
+
+    }
+
+    const isBookmarkedPost=(postid,bookmarks)=>{
+
+    }
+
 
     return (
         <div className='w-full h-full'>
@@ -75,8 +83,9 @@ function PostCard({ posts, popup, setPopup }) {
                                     )}
                                 </div>
                                 <div className='icons flex space-x-20'>
+                                {/* {likePosts && likePosts?.find((posts, id) => posts?.likes?.likeCount) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} /> : */}
                                     <span>
-                                        {likePosts && likePosts?.find((posts, id) => posts?.likes?.likeCount) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} /> : <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />}
+                                    <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />
                                     </span>
                                     <span>
                                         <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }} />

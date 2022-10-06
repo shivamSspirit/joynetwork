@@ -2,7 +2,6 @@ import * as postApis from '../apis/post'
 
 export function createPost(data, callback) {
     return async (dispatch) => {
-        console.log('data',data)
         const response = await postApis?.postSinglePost(data);
         await dispatch(setpostsData(response?.data?.posts))
         if (callback) {
