@@ -67,3 +67,14 @@ export async function editSinglePost(postID, postData) {
         console.log(error)
     }
 }
+
+// paginated post
+
+export async function getpaginatedPost(pagenum){
+    try {
+        const response = await axios.post(`${secondaryBaseUrl}/${pagenum}`)
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -18,28 +18,28 @@ function SideBar() {
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span className=''><img className='h-6 w-6' src={homeIcon} alt='home' /></span>
-                            <span className=''><NavLink to={'#home'}>Home</NavLink></span>
+                            <span className=''><NavLink to={'/'}>Home</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={eploreIcon} alt='explore' /></span>
-                            <span><NavLink to={'#explore'}>Explore</NavLink></span>
+                            <span><NavLink to={'/explore'}>Explore</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={bookmark} alt='bookmark' /></span>
-                            <span><NavLink to={'#bookmarks'}>Bookmarks</NavLink></span>
+                            <span><NavLink to={'/bookmarks'}>Bookmarks</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={likeIcon} alt='liked' /></span>
-                            <span><NavLink to={'#likedPost'}>LikedPost</NavLink></span>
+                            <span><NavLink to={'/likes'}>LikedPost</NavLink></span>
                         </div>
                     </li>
 

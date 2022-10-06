@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-// import * as postActions from '../../actions/post'
 import Postmenuicon from '../../assest/dots.png'
 import ModalforAction from '../modals/modal'
-
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import * as bookmarkActions from '../../actions/bookmark'
 import * as likeDislikes from '../../actions/likedislike'
-import { compose } from 'redux'
-
-
-
-
+import * as postActionApi from '../../apis/post'
 
 function PostCard({ posts, popup, setPopup }) {
     const { ...state } = useSelector(state => state);
     const dispatch = useDispatch()
-
+    const { ...postid } = useParams()
 
     const { likePosts } = useSelector(state => state?.likePostReducer);
-    const {bookmarkPosts}  = useSelector(state=>state?.bookmarkPostReducer)
-
-
-    console.log('like state from main ', bookmarkPosts)
-    console.log(likePosts?.find(posts => posts?.likes?.likeCount))
-    console.log('posts', state)
-
+    const { bookmarkPosts } = useSelector(state => state?.bookmarkPostReducer)
 
     const likeposts = async (postId) => {
         await dispatch(likeDislikes?.likePost(postId, () => {
@@ -60,13 +48,11 @@ function PostCard({ posts, popup, setPopup }) {
     };
 
 
-
     return (
         <div className='w-full h-full'>
             {state?.postReducer?.userPosts
-                && state?.postReducer?.userPosts?.map((post, idx) => (
-                    // <div key={`${idx}`} className=''>
-                    <div key={`postcard${post?._id}`} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex">
+                && state?.postReducer?.userPosts?.map((post, id) => (
+                    <div key={id} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex">
                         <div className='flex space-x-12'>
                             <div className="shrink-0">
                                 <span className="h-9 w-9 rounded-full p-3 bg-gray-dark">{state?.settings?.currentUser?.firstName[0] ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `creater`}</span>
@@ -86,26 +72,16 @@ function PostCard({ posts, popup, setPopup }) {
                                     {post?.content?.content?.postMedia && (
                                         <img src={`${post?.content?.content?.postMedia
                                             }`} className='w-full max-h-full' alt='postImage' />
-
-                                        // <div className='imgBlock container w-full h-4/5'>
-                                        //     {console.log('val', post?.content?.media.includes('image'))}
-                                        //     {post?.postMedia?.includes('image') && (
-                                        //         <img src={`${post?.postMedia}`} className='w-full max-h-full' alt='postImage' />
-                                        //     )}
-                                        //     {post?.postMedia?.includes('video') && (
-                                        //         <video controls loop className='w-full max-h-full' src={post?.postMedia} />
-                                        //     )}
-                                        // </div>
                                     )}
                                 </div>
                                 <div className='icons flex space-x-20'>
                                     <span>
-                                        {likePosts && likePosts?.find(posts => posts?.likes?.likeCount) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} /> :   <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />}
+                                        {likePosts && likePosts?.find((posts, id) => posts?.likes?.likeCount) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => { dislikepost(post?._id) }} /> : <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => { likeposts(post?._id) }} />}
                                     </span>
                                     <span>
-                                    <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  /> 
-                                        </span>
-                                        {/* { bookmarkPosts && bookmarkPosts?.find(posts => posts?.likes?.likeCount)? <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  />: <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => { removefrombookmark(post?._id) }} />}
+                                        <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }} />
+                                    </span>
+                                    {/* { bookmarkPosts && bookmarkPosts?.find(posts => posts?.likes?.likeCount)? <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  />: <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => { removefrombookmark(post?._id) }} />}
                                     </span> */}
                                     <Link to={`/post/${post?._id}`}> <span> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></span></Link>
 
@@ -113,9 +89,6 @@ function PostCard({ posts, popup, setPopup }) {
                                 </div>
                             </div>
                         </div>
-                        {/* </div>
-                         */}
-
                         {/* <ModalforAction popup={popup} id={idx}/> */}
                     </div>
                 ))}

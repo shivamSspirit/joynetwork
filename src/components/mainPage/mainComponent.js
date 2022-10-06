@@ -3,6 +3,8 @@ import CreatePost from '../post/createPost'
 import Suggestions from './suggestions'
 import { NavLink, useNavigate } from 'react-router-dom'
 
+import { useLocation } from 'react-router-dom'
+
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -16,6 +18,10 @@ import ModalforAction from '../modals/modal'
 
 import PostComment from '../postComment/postcomment'
 import SideBar from './sidebar'
+import { conforms } from 'lodash'
+import ExploreFedds from '../explorecompoents/explore'
+import Likes from '../likes/likes'
+import Bookmark from '../bookmark/bookmark'
 
 function MainComponent() {
   const [userpostss, setUserPosts] = useState()
@@ -27,13 +33,17 @@ function MainComponent() {
   const { currentUser } = useSelector(state => state?.settings)
   const { users } = useSelector(state => state?.userReducer);
 
-  const {likePosts} = useSelector(state=>state?.likePostReducer);
+  const { likePosts } = useSelector(state => state?.likePostReducer);
 
-  console.log('like state from main ',likePosts)
+  const location = useLocation()
 
-  console.log(likePosts?.find(posts=>posts?.likes?.likeCount))
+  console.log('like state from main ', likePosts)
 
+  console.log('postidddddd', location)
 
+  console.log(likePosts?.find(posts => posts?.likes?.likeCount))
+
+  const { ...postid } = useParams()
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -92,24 +102,65 @@ function MainComponent() {
     }
   }, [users, posts])
 
+  // here components differenet from origgin location
+
+  const ReturnComponentsfromorigin = () => {
+    if (location.pathname === '/') {
+      return (
+          <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
+            <div className='h-full  overflow-scroll'>
+              <CreatePost />
+              <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
+            </div>
+          </div>
+      )
+    }
+
+    if (location.pathname === '/explore') {
+      return (
+          <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
+            <div className='h-full overflow-scroll'>
+              <ExploreFedds />
+            </div>
+          </div>
+      )
+    }
+
+    if(location.pathname==='/likes'){
+      return (
+        <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
+          <div className='h-full overflow-scroll'>
+            <Likes/>
+          </div>
+        </div>
+    )
+    }
+
+    if(location.pathname='/bookmarks'){
+      return (
+        <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
+          <div className='h-full overflow-scroll'>
+            <Bookmark/>
+          </div>
+        </div>
+    )
+    }
+
+  }
+
   return (
     <div className='w-full bg-sky-blue relative h-full' >
       <div className='flex flex-row w-full'>
         <SideBar />
-        {postId ? (<>
-          <PostComment />
-        </>)
-          :
-          (<>
-            <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
-              <div>
-                <CreatePost />
-                <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
-                {/* <ModalforAction popup={popup} setPopup={setPopup}/> */}
-              </div>
+        
+          {ReturnComponentsfromorigin()}
+          {/* <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow'>
+            <div className='h-full  overflow-scroll'>
+              <CreatePost />
+              <PostCard posts={currentuserpost} popup={popup} setPopup={setPopup} />
             </div>
-          </>)
-        }
+          </div> */}
+        
         <div className='basis-1/4'>
           <Suggestions users={users} />
         </div>

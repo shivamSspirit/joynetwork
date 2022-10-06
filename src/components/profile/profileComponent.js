@@ -17,6 +17,7 @@ function ProfileComponent() {
     const { ...state } = useSelector(state => state);
     const location = useLocation();
     const { modal,modelOperation } = useModal()
+    const {currentuserfollwowing,currnetuserfollowers }=useSelector(state=>state?.followerPostReducer)
     
 
 
@@ -84,8 +85,8 @@ function ProfileComponent() {
 
                         <div className='flex flex-row gap-3'>
                             <p><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
-                            <p><span>{state?.settings?.currentUser?.followers?.length}</span>followers</p>
-                            <p><span>{state?.settings?.currentUser?.following?.length}</span>following</p>
+                            <p><span>{currnetuserfollowers?.length}</span>followers</p>
+                            <p><span>{currentuserfollwowing?.length}</span>following</p>
                         </div>
                     </div>
                     <div>

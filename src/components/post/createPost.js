@@ -17,8 +17,6 @@ function CreatePost() {
         await uploadFiles(e.target.files[0], setMediaURL, setOpa, setDeleteToken)
     }
 
-
-
     const handlecreatePost = async(e) => {
         e.preventDefault();
         let postData;

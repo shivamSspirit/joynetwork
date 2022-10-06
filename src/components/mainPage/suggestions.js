@@ -5,20 +5,28 @@ import { useDispatch, useSelector } from 'react-redux'
 function Suggestions({ users }) {
     const dispatch = useDispatch();
     const [followeduser, setFollowedUser] = useState()
+    const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
 
     // const { state } = useSelector(state => state?.userReducer)
 
-    useEffect(()=>{
-        if(users){
+    useEffect(() => {
+        if (users) {
             setFollowedUser(users)
         }
-    },[users])
+    }, [users])
 
-    const followuser =  (userId) => {
+    const followuser = (userId) => {
         dispatch(followActions?.followSomeone(userId, () => {
-            setFollowedUser(users.filter(user => user?._id !== userId))
+            // setFollowedUser(users.filter(user => user?._id !== userId))
+            console.log('follw user')
         }))
 
+    }
+
+    const unfollowUser = (userID) => {
+        dispatch(followActions?.unfollowSomeone(userID, () => {
+            console.log("unflowwing user")
+        }))
     }
 
     return (
@@ -30,8 +38,8 @@ function Suggestions({ users }) {
                         <p>show more-</p>
                     </div>
                     <ul className='flex flex-col gap-3'>
-                        {followeduser && followeduser?.map((user, idx) => (
-                            <li key={`${idx}`}>
+                        {followeduser && followeduser?.map((user, id) => (
+                            <li key={`${id}`}>
                                 <div className='flex flex-row space-x-3'>
                                     <div className="shrink-0">
                                         <img className="h-12 w-12 rounded-full" src={user?.profileImage?.url} alt={user?.profileImage?.original_filename} />
@@ -41,7 +49,7 @@ function Suggestions({ users }) {
                                         <p>{user?.username}</p>
                                     </div>
                                     <div className='flex-none'>
-                                        <button onClick={() => followuser(user?._id)}>Follow+</button>
+                                        {currentuserfollwowing?.find(user => user?._id === user?._id) ? <button onClick={() => unfollowUser(user?._id)}>UnFollow-</button>: <button onClick={() => followuser(user?._id)}>Follow+</button>}
                                     </div>
                                 </div>
                             </li>

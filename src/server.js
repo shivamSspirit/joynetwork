@@ -14,6 +14,7 @@ import {
   likePostHandler,
   dislikePostHandler,
   getAllUserPostsHandler,
+  getPagedPosts
 } from "./backend/controllers/PostController";
 import {
   getPostCommentsHandler,
@@ -77,6 +78,8 @@ export function makeServer({ environment = "development" } = {}) {
       this.post("/posts/edit/:postId", editPostHandler.bind(this));
       this.post("/posts/like/:postId", likePostHandler.bind(this));
       this.post("/posts/dislike/:postId", dislikePostHandler.bind(this));
+
+      this.post("/posts/:pagedposts",getPagedPosts.bind(this));
 
       //post comments routes (public)
       this.get("/comments/:postId", getPostCommentsHandler.bind(this));

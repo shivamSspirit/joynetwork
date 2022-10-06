@@ -300,6 +300,14 @@ export const deletePostHandler = function (schema, request) {
   }
 };
 
+ export const getPagedPosts = function (schema,request) {
+    const { pageNum } = request.params;
+    const latestpost =this.db.posts
+    console.log("paginated post",latestpost)
+    const paginatedpost = latestpost.slice(0, pageNum * 2 + 2);
+    return new Response(200, {}, { posts: paginatedpost })
+  }
+
 
 // this is in controllers
 

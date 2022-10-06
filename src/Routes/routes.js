@@ -22,36 +22,27 @@ import ProfilePage from "../themes/profilePage";
 
 import FollowersComponent from '../components/profile/Followers'
 import Follwingcomponent from '../components/profile/Following'
+import ExploreFedds from "../components/explorecompoents/explore";
+import Likes from "../components/likes/likes";
+import Bookmark from "../components/bookmark/bookmark";
 
 
 function AllRoutes() {
-
-    // const navigate = useNavigate()
-
-    // const [token, setToken] = useState(null);
-
-
-    // useEffect(() => {
-    //     if (authCookies?.getAuthCookie()) {
-    //         navigate('/')
-    //     } else {
-    //         navigate('/auth/login')
-    //     }
-    // }, [authCookies?.getAuthCookie()])
-
-
-
     return (
         <div>
             <Router>
                 <Routes>
-                    <Route exact path="/" element={<LandingPage />} />
+                    <Route exact path="/" element={<LandingPage />}>
+                        <Route exact path="/explore" element={<ExploreFedds />} />
+                        <Route exact path="/likes" element={<Likes/>}/>
+                        <Route exact path="/bookmarks" element={<Bookmark/>}/>
+                    </Route>
                     <Route exact path="/auth/login" element={<LoginPage />} />
                     <Route exact path="/auth/signup" element={<SignupPage />} />
                     <Route exact path="/post/:postId" element={<MainComponent />} />
                     <Route exact path="/profile" element={<ProfilePage />} >
-                        <Route  path="follower" element={<FollowersComponent />} />
-                        <Route  path="following" element={<Follwingcomponent />} />
+                        <Route path="follower" element={<FollowersComponent />} />
+                        <Route path="following" element={<Follwingcomponent />} />
                     </Route>
                 </Routes>
             </Router>

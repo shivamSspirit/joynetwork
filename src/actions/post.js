@@ -32,6 +32,17 @@ export function getallPostsForuser(data, callback) {
     }
 }
 
+export function getpaginatedPost(pagenum,callback){
+    return async (dispatch)=>{
+        const response = await postApis?.getpaginatedPost(pagenum);
+        await dispatch(setpagedpostData(response?.data?.posts));
+
+        if(callback){
+            return callback()
+        }
+    }
+}
+
 
 
 
@@ -40,6 +51,13 @@ export function setpostsData(posts) {
         type: "SET_POSTS",
         posts
     };
+}
+
+export function setpagedpostData(pagedPosts){
+    return {
+        type:"SET_PAGED_POST",
+        pagedPosts
+    }
 }
 
 export function setPostsforSingleuser(userPosts) {

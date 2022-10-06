@@ -1,6 +1,7 @@
 export const default_posts_state = {
     posts: [],
-    userPosts: undefined
+    userPosts: undefined,
+    pagedposts:[]
 };
 
 
@@ -18,6 +19,16 @@ export const postReducer = (state = default_posts_state, action) => {
                 ...state,
                 posts: state?.posts,
                 userPosts: action?.userPosts
+            }
+        }
+
+        case "SET_PAGED_POST":{
+            return{
+                ...state,
+                posts: state?.posts,
+                userPosts: action?.userPosts,
+                pagedposts:action?.pagedPosts
+
             }
         }
 
