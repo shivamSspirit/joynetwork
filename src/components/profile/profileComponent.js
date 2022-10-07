@@ -6,19 +6,20 @@ import { useLocation } from 'react-router-dom'
 
 import * as likedislike from '../../actions/likedislike'
 import * as bookmarkActions from '../../actions/bookmark'
-import useModal from '../../hoooks/useModal'
+import {useModal} from '../../hoooks/useModal'
 
 import ProfileModal from '../modals/profileModal'
-
 
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
     const { ...state } = useSelector(state => state);
     const location = useLocation();
-    const { modal,modelOperation } = useModal()
-    const {currentuserfollwowing,currnetuserfollowers }=useSelector(state=>state?.followerPostReducer)
-   
-    const dispatch = useDispatch()
+    const { modal, setModal,modalOperation } = useModal()
+    const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
+
+    const dispatch = useDispatch();
+
+    console.log('modal value from profie',modal);
 
     useEffect(() => {
         if (state?.settings?.currentUser) {
@@ -60,14 +61,12 @@ function ProfileComponent() {
     };
 
 
-
-
-
     return (
         <>
-            <div className='flex flex-row'>
+        <div className='bg-blue h-screen overflow-scroll'>
+        <div className='flex flex-row'>
                 <SideBar />
-                <div className='flex flex-row w-full justify-evenly'>
+                <div className='flex flex-row w-full justify-evenly h-full'>
                     <div className='profile-side flex flex-col gap-2'>
                         <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
                         <h2 className='text-left'>{`${state?.settings?.currentUser?.firstName} ${state?.settings?.currentUser?.lastName}`}</h2>
@@ -82,7 +81,7 @@ function ProfileComponent() {
                         </div>
                     </div>
                     <div>
-                        <button onClick={()=>modelOperation()}  className='w-28 h-9 bg-gray-dark text-white'>Edit profile</button>
+                        <button onClick={() => modalOperation()} className='w-28 h-9 bg-gray-dark mt-6 text-white'>Edit profile</button>
                     </div>
                 </div>
             </div>
@@ -97,11 +96,11 @@ function ProfileComponent() {
             </div>
 
 
-            <div className='personal-posts'>
+            <div className='personal-posts w-full h-full'>
                 <div className='w-full h-full'>
                     {currentposts?.map((post, idx) => (
                         <div key={`${idx}`} className=''>
-                            <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex">
+                            <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream">
                                 <div className='flex space-x-12'>
                                     <div className="shrink-0">
                                         <span className="h-9 w-9 rounded-full p-3 bg-gray-dark">{state?.settings?.currentUser?.firstName[0] ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `creater`}</span>
@@ -139,8 +138,11 @@ function ProfileComponent() {
                     ))}
                 </div>
             </div>
-
-            {modal && <ProfileModal />}
+            <div>
+            {modal===true ? <ProfileModal />:null}
+            </div>
+        </div>
+           
         </>
     )
 }

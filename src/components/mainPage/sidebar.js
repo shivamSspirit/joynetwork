@@ -13,39 +13,41 @@ import * as authActions from '../../actions/auth'
 function SideBar() {
     return (
         <>
-            <div className='container h-full basis-1/4 bg-slate-600 w-full'>
+            <div className='container h-full basis-1/4 bg-slate-600 w-full p-3'>
                 <ul className='flex flex-col justify-start items-start w-1/2 m-auto gap-6'>
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span className=''><img className='h-6 w-6' src={homeIcon} alt='home' /></span>
-                            <span className=''><NavLink to={'/'}>Home</NavLink></span>
+                            <span className="hover:bg-cream rounded-md"><NavLink to={'/'}>Home</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={eploreIcon} alt='explore' /></span>
-                            <span><NavLink to={'/explore'}>Explore</NavLink></span>
+                            <span className="hover:bg-cream rounded-md"><NavLink to={'/explore'}>Explore</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={bookmark} alt='bookmark' /></span>
-                            <span><NavLink to={'/bookmarks'}>Bookmarks</NavLink></span>
+                            <span className="hover:bg-cream rounded-md"><NavLink to={'/bookmarks'}>Bookmarks</NavLink></span>
                         </div>
                     </li>
 
                     <li>
                         <div className='flex flex-row gap-8'>
                             <span><img className='h-6 w-6' src={likeIcon} alt='liked' /></span>
-                            <span><NavLink to={'/likes'}>LikedPost</NavLink></span>
+                            <span className="hover:bg-cream rounded-md"><NavLink to={'/likes'}>LikedPost</NavLink></span>
                         </div>
                     </li>
 
                     <li className='w-full'>
                         <div className='w-full'>
-                            <button className='w-full md:w-1/2 bg-black border rounded text-center text-white'>post</button>
+                            <button className='w-full md:w-1/2 bg-black border rounded text-center text-white'>
+                                <NavLink to={'/explore'}>post</NavLink>
+                            </button>
                         </div>
                     </li>
 

@@ -60,7 +60,7 @@ function PostCard({ posts, popup, setPopup }) {
         <div className='w-full h-full'>
             {state?.postReducer?.userPosts
                 && state?.postReducer?.userPosts?.map((post, id) => (
-                    <div key={id} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex">
+                    <div key={id} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream mt-3">
                         <div className='flex space-x-12'>
                             <div className="shrink-0">
                                 <span className="h-9 w-9 rounded-full p-3 bg-gray-dark">{state?.settings?.currentUser?.firstName[0] ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `creater`}</span>

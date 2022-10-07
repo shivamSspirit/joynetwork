@@ -30,9 +30,9 @@ function Login() {
 
     return (
         <div>
-            <div className='container flex h-screen w-screen items-center justify-center overflow-scroll'>
+            <div className='container flex h-screen w-screen items-center justify-center overflow-scroll bg-blue'>
 
-                <div className='bg-green w-1/3 flex flex-col items-center'>
+                <div className='bg-cream w-1/3 flex flex-col items-center rounded-sm'>
 
                     <div className=''>
                         <h2 className=''>Login to webapp</h2>

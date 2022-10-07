@@ -46,10 +46,11 @@ function ExploreFedds() {
 
 
   return (
-      <div className='w-full h-full'>
+    <div className='h-screen'>
+<div className='w-full'>
         {state?.postReducer?.posts
           && state?.postReducer?.posts?.map((post, id) => (
-            <div key={id} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex h-full overflow-scroll">
+            <div key={id} className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex h-full overflow-scroll bg-cream mt-3">
               <div className='flex space-x-12'>
                 <div className="shrink-0">
                   <span className="h-9 w-9 rounded-full p-3 bg-gray-dark">{state?.settings?.currentUser?.firstName[0] ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `creater`}</span>
@@ -62,8 +63,6 @@ function ExploreFedds() {
                         <p className='font-light'>@pretSspirit</p>
                         <p>.1min</p>
                       </span>
-
-                      {/* <span className='flex justify-center items-center'><img onClick={() => setPopup(!popup)} id="open-btn" className='h-6 w-5 mb-4 cursor-pointer' src={Postmenuicon} alt='menu-icon' /></span> */}
                     </div>
                     <p className='text-left about post'>{post?.content?.content?.status}</p>
                     {post?.content?.content?.postMedia && (
@@ -81,7 +80,6 @@ function ExploreFedds() {
                     {/* { bookmarkPosts && bookmarkPosts?.find(posts => posts?.likes?.likeCount)? <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => { addtobookmark(post?._id) }}  />: <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => { removefrombookmark(post?._id) }} />}
                                     </span> */}
                     <Link to={`/post/${post?._id}`}> <span> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></span></Link>
-
                     <img className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" onClick={() => handleShareClick(post?._id)} />
                   </div>
                 </div>
@@ -91,6 +89,8 @@ function ExploreFedds() {
           ))}
       </div>
     
+    </div>
+      
   )
 }
 

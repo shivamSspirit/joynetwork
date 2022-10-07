@@ -4,7 +4,7 @@ import ProfileComponent from '../components/profile/profileComponent'
 
 function ProfilePage() {
   return (
-    <div className='h-screen w-screen'>
+    <div className='h-screen w-screen bg-blue'>
         <Header/>
         <ProfileComponent/>
     </div>

@@ -27,7 +27,8 @@ module.exports = {
       'white': '#FFFFFF',
       'sky-blue': '#87ceeb',
       'coffie-color':'FFFDD0',
-      'black':'#000000'
+      'black':'#000000',
+      'cream':'#FFFDD0'
     },
     fontFamily: {
       Inter: ['Inter', 'sans-serif'],

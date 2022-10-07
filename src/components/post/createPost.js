@@ -38,7 +38,7 @@ function CreatePost() {
     }
     return (
         <div className=''>
-            <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex">
+            <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream mt-3">
                 <div className='flex space-x-12'>
                     <div className="shrink-">
                         <span className="h-12 w-12 rounded-full bg-gray-dark p-3">{state?.settings?.currentUser?.firstName ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `cxz`}</span>
@@ -55,7 +55,7 @@ function CreatePost() {
                             <img className="h-6 w-6 rounded" src="/img/emoji.png" alt="img" />
 
                         </div>
-                        <button disabled={opa} onClick={handlecreatePost} className={`button rounded-md text-gray-800 bg-slate-400 p-2 ${opa && "opacity-5"}`}>Create</button>
+                        <button disabled={opa} onClick={handlecreatePost} className={`button bg-black rounded-md text-cream bg-slate-400 p-2 ${opa && "opacity-5"}`}>Create</button>
                     </div>
                 </div>
             </div>

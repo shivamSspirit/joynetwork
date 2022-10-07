@@ -13,7 +13,6 @@ export function isAuthCookiePresent() {
 }
 
 export function saveAuthCookie(cookieValue) {
-	console.log('cookies',cookieValue)
 	cookies.set(AUTH_COOKIE_NAME, cookieValue);
 }
 

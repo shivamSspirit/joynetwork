@@ -37,18 +37,13 @@ function SignUp() {
     return (
 
         <div>
-            <div className='container flex h-screen w-screen items-center justify-center'>
-
-                <div className='bg-green w-1/4 flex flex-col items-center signup-height'>
-
+            <div className='container flex h-screen w-screen items-center justify-center bg-blue'>
+                <div className='bg-cream w-1/4 flex flex-col items-center signup-height rounded-sm'>
                     <div className=''>
                         <h2 className=''>Signup to webapp</h2>
                         <p className='text-small text-center'>connect with people</p>
                     </div>
-
-
                     <form className="flex items-center flex-col" onSubmit={handleSubmit}>
-
                         <div className=''>
                             <label className="relative block text-left">
                                 FirstName:
@@ -100,7 +95,6 @@ function SignUp() {
                 </div>
             </div>
         </div>
-
     )
 }
 
