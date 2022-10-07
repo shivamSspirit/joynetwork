@@ -44,7 +44,7 @@ function CreatePost() {
                         <span className="h-12 w-12 rounded-full bg-gray-dark p-3">{state?.settings?.currentUser?.firstName ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `cxz`}</span>
                     </div>
                     <div className='flex flex-col gap-3'>
-                        <textarea value={status} onChange={(e) => handlepostContent(e)} placeholder='what is in your mind' className='w-80 h-32 outline-0 border-solid border-2' />
+                        <textarea value={status} onChange={(e) => handlepostContent(e)} placeholder='what is in your mind' className='w-80 h-32 outline-0 border-solid border-2 rounded-md' />
                         <div className='icons flex space-x-3'>
                             <span>
                                 <label htmlFor="inputTag">

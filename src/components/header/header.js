@@ -15,17 +15,17 @@ function Header() {
                     </div>
                     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto justify-start">
                         <div className="text-sm lg:flex-grow">
-                            <Link to="/explore" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 text-large hover:text-blue mr-4">
+                            <Link to="/explore" className="block mt-4 lg:inline-block lg:mt-0 text-large hover:text-blue mr-4 text-[16px] font-semibold">
                                posts
                             </Link>
-                            <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 text-large hover:text-blue mr-4">
+                            <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 text-large hover:text-blue mr-4 text-[16px] font-semibold">
                                profile
                             </Link>
                         </div>
         
                         <div className='flex lg:flex-grow lg:justify-end lg:justify-items-end'>
-                            <Link to={'/profile'} className="items-center md:justify-center md:justify-items-center inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-2 lg:mt-0 rounded-full">                              
-                                <h5 className='text-black'>{state?.settings?.currentUser? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`: `creater`}</h5>       
+                            <Link to={'/profile'} className="items-center md:justify-center md:justify-items-center inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent  hover:bg-black hover:text-white mt-2 lg:mt-0 rounded-full">                              
+                                <h5 className='text-black hover:text-white text-[16px] font-semibold'>{state?.settings?.currentUser? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`: `creater`}</h5>       
                             </Link>
                         </div>
                     </div>

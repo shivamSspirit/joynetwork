@@ -9,6 +9,8 @@ import * as bookmarkActions from '../../actions/bookmark'
 import {useModal} from '../../hoooks/useModal'
 
 import ProfileModal from '../modals/profileModal'
+import Followers from './Followers'
+import Following from './Following'
 
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState(null)
@@ -19,7 +21,7 @@ function ProfileComponent() {
 
     const dispatch = useDispatch();
 
-    console.log('modal value from profie',modal);
+    console.log('location value from profie',location);
 
     useEffect(() => {
         if (state?.settings?.currentUser) {
@@ -61,42 +63,10 @@ function ProfileComponent() {
     };
 
 
-    return (
-        <>
-        <div className='bg-blue h-screen overflow-scroll'>
-        <div className='flex flex-row'>
-                <SideBar />
-                <div className='flex flex-row w-full justify-evenly h-full'>
-                    <div className='profile-side flex flex-col gap-2'>
-                        <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
-                        <h2 className='text-left'>{`${state?.settings?.currentUser?.firstName} ${state?.settings?.currentUser?.lastName}`}</h2>
-                        <h3 className='text-left'>@{state?.settings?.currentUser?.username}</h3>
-                        <p className='text-left'>{state?.settings?.currentUser?.bio}</p>
-                        <p className='text-left'>Website: <span><a href={`${state?.settings?.currentUser?.githubUrl}`}>{state?.settings?.currentUser?.githubUrl}</a></span></p>
-
-                        <div className='flex flex-row gap-3'>
-                            <p><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
-                            <p><span>{currnetuserfollowers?.length}</span>followers</p>
-                            <p><span>{currentuserfollwowing?.length}</span>following</p>
-                        </div>
-                    </div>
-                    <div>
-                        <button onClick={() => modalOperation()} className='w-28 h-9 bg-gray-dark mt-6 text-white'>Edit profile</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div className='w-full flex flex-row gap-9 justify-center'>
-                <div className='w-1/2 flex gap-8 justify-center'>
-                    <Link to='/profile' className='cursor-pointer'>Posts</Link>
-                    <Link to='/profile/follower' className='cursor-pointer'>Followers</Link>
-                    <Link to='/profile/following' className='cursor-pointer'>Following</Link>
-                </div>
-            </div>
-
-
-            <div className='personal-posts w-full h-full'>
+    const Returncomponentwithorigin=()=>{
+        if(location.pathname==="/profile"){
+            return(
+                <>
                 <div className='w-full h-full'>
                     {currentposts?.map((post, idx) => (
                         <div key={`${idx}`} className=''>
@@ -137,6 +107,64 @@ function ProfileComponent() {
                         </div>
                     ))}
                 </div>
+                </>
+            )
+        }
+        if(location.pathname==="/profile/follower"){
+            return(
+                <>
+                <Followers/>
+                </>
+            )
+        }
+
+        if(location.pathname==="/profile/following"){
+            return(
+                <>
+                <Following/>
+                </>
+            )
+        }
+    }
+
+
+    return (
+        <>
+        <div className='bg-blue h-screen overflow-scroll'>
+        <div className='flex flex-row'>
+                <SideBar />
+                <div className='flex flex-row w-full justify-evenly h-full'>
+                    <div className='profile-side flex flex-col gap-2'>
+                        <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
+                        <h2 className='text-left text-cream'>{`${state?.settings?.currentUser?.firstName} ${state?.settings?.currentUser?.lastName}`}</h2>
+                        <h3 className='text-left text-cream'>@{state?.settings?.currentUser?.username}</h3>
+                        <p className='text-left text-cream'>{state?.settings?.currentUser?.bio}</p>
+                        <p className='text-left text-cream'>Website: <span><a href={`${state?.settings?.currentUser?.githubUrl}`}>{state?.settings?.currentUser?.githubUrl}</a></span></p>
+
+                        <div className='flex flex-row gap-3'>
+                            <p className={`text-cream`}><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
+                            <p className='text-cream'><span>{currnetuserfollowers?.length}</span>followers</p>
+                            <p className='text-cream'><span>{currentuserfollwowing?.length}</span>following</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button onClick={() => modalOperation()} className='w-28 h-9 bg-gray-dark mt-6 text-white rounded-md'>Edit profile</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className='w-full flex flex-row gap-9 justify-center'>
+                <div className='w-1/2 flex gap-8 justify-center'>
+                    <Link to='/profile' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile"&&'text-cream'}`}>Posts</Link>
+                    <Link to='/profile/follower' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile/follower"&&'text-cream'}`}>Followers</Link>
+                    <Link to='/profile/following' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile/following"&&'text-cream'}`}>Following</Link>
+                </div>
+            </div>
+
+
+            <div className='personal-posts w-full h-full'>
+                {Returncomponentwithorigin()}
             </div>
             <div>
             {modal===true ? <ProfileModal />:null}
