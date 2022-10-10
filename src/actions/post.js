@@ -34,6 +34,7 @@ export function getallPostsForuser(data, callback) {
 export function getpaginatedPost(pagenum,callback){
     return async (dispatch)=>{
         const response = await postApis?.getpaginatedPost(pagenum);
+        console.log('res',response)
         await dispatch(setpagedpostData(response?.data?.posts));
 
         if(callback){

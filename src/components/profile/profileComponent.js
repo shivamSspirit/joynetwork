@@ -2,115 +2,49 @@ import React, { useEffect, useState } from 'react'
 import SideBar from '../mainPage/sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-
-import * as likedislike from '../../actions/likedislike'
-import * as bookmarkActions from '../../actions/bookmark'
+import { useLocation,useParams } from 'react-router-dom'
 import {useModal} from '../../hoooks/useModal'
 
 import ProfileModal from '../modals/profileModal'
 import Followers from './Followers'
 import Following from './Following'
+import SinglePost from '../post/singlepostcard'
 
 function ProfileComponent() {
-    const [currentposts, setcurrentposts] = useState(null)
+    const [currentposts, setcurrentposts] = useState([]);
     const { ...state } = useSelector(state => state);
     const location = useLocation();
+    const [profilecurrentuser,setProfilecurenuser] = useState();
     const { modal, setModal,modalOperation } = useModal()
     const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
+    const {profileId} = useParams();
 
-    const dispatch = useDispatch();
 
-    console.log('location value from profie',location);
+    useEffect(()=>{
+        if(profileId){
+           setProfilecurenuser(state?.userReducer?.users?.find(user=>user?.profileImage?.original_filename===profileId))
+        }
+    },[profileId])
 
     useEffect(() => {
-        if (state?.settings?.currentUser) {
-            setcurrentposts(state?.postReducer?.userPosts)
-        }
-    }, [state?.settings?.currentUser])
+       setcurrentposts([state?.postReducer?.posts?.find?.(post=>post?.profileImage?.original_filename===profileId)])
+    }, [profileId])
 
-
-    const likeposts = (postId) => {
-        dispatch(likedislike?.likePost(postId, () => {
-            console.log('liking the post')
-        }))
-    }
-
-    const dislikepost = (postId) => {
-        dispatch(likedislike?.dislikePost(postId, () => {
-            console.log('disliking post')
-        }))
-    }
-
-    const addtobookmark = (postId) => {
-        dispatch(bookmarkActions?.addPostToBookMark(postId, () => {
-            console.log('adding post to bookmark')
-        }))
-    }
-
-    const removefrombookmark = (postId) => {
-        dispatch(bookmarkActions?.removePostFromBookMark(postId, () => {
-            console.log('removing post from bookmark')
-        }))
-    }
-
-
-    const handleShareClick = (postId) => {
-        window.navigator.clipboard.writeText(
-            `${window.location.origin}/post/${postId}`
-        );
-        console.log(`${window.location.origin}/post/${postId}`)
-    };
 
 
     const Returncomponentwithorigin=()=>{
-        if(location.pathname==="/profile"){
+        if(location.pathname===`/profile/${profileId}`){
             return(
                 <>
                 <div className='w-full h-full'>
-                    {currentposts?.map((post, idx) => (
-                        <div key={`${idx}`} className=''>
-                            <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream">
-                                <div className='flex space-x-12'>
-                                    <div className="shrink-0">
-                                        <span className="h-9 w-9 rounded-full p-3 bg-gray-dark">{state?.settings?.currentUser?.firstName[0] ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `creater`}</span>
-                                    </div>
-                                    <div className='flex flex-col gap-3'>
-                                        <div className=''>
-                                            <div className='titles flex flex-row gap-6'>
-                                                <span className='flex flex-row gap-5'>
-                                                    <p className='text-lg'>{post?.username}</p>
-                                                    <p className='font-light'>@pretSspirit</p>
-                                                    <p>.1min</p>
-                                                </span>
-
-                                                {/* <span className='flex justify-center items-center'><img onClick={() => setPopup(!popup)} id="open-btn" className='h-6 w-5 mb-4 cursor-pointer' src={Postmenuicon} alt='menu-icon' /></span> */}
-                                            </div>
-                                            <p className='text-left about post'>{post?.content?.content?.status}</p>
-                                            {post?.content?.content?.postMedia && (
-                                                <img src={`${post?.content?.content?.postMedia}`} className='w-full max-h-full' alt='postImage' />
-                                            )}
-                                        </div>
-                                        <div className='icons flex space-x-20'>
-                                            <span>
-                                                {state?.likePostReducer?.likePosts?.find(posts => posts?._id === post?._id) ? <img className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" onClick={() => dislikepost(post?._id)} /> : <img className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" onClick={() => likeposts(post?._id)} />}
-                                            </span>
-                                            <span>
-                                                {state?.bookmarkPostReducer?.bookmarkPosts?.find(posts => posts?._id === post?._id) ? <img className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" onClick={() => removefrombookmark(post?._id)} /> : <img className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" onClick={() => addtobookmark(post?._id)} />}
-                                            </span>
-                                            <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" />
-                                            <img className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" onClick={() => handleShareClick(post?._id)} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {currentposts&&currentposts?.map((post, id) => (
+                        <SinglePost key={id} post={post} />
                     ))}
                 </div>
                 </>
             )
         }
-        if(location.pathname==="/profile/follower"){
+        if(location.pathname.includes(`/profile/${profileId}/follower`)){
             return(
                 <>
                 <Followers/>
@@ -118,7 +52,7 @@ function ProfileComponent() {
             )
         }
 
-        if(location.pathname==="/profile/following"){
+        if(location.pathname.includes(`/profile/${profileId}/following`)){
             return(
                 <>
                 <Following/>
@@ -136,11 +70,12 @@ function ProfileComponent() {
                 <div className='flex flex-row w-full justify-evenly h-full'>
                     <div className='profile-side flex flex-col gap-2'>
                         <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
-                        <h2 className='text-left text-cream'>{`${state?.settings?.currentUser?.firstName} ${state?.settings?.currentUser?.lastName}`}</h2>
-                        <h3 className='text-left text-cream'>@{state?.settings?.currentUser?.username}</h3>
-                        <p className='text-left text-cream'>{state?.settings?.currentUser?.bio}</p>
-                        <p className='text-left text-cream'>Website: <span><a href={`${state?.settings?.currentUser?.githubUrl}`}>{state?.settings?.currentUser?.githubUrl}</a></span></p>
+                        <h2 className='text-left text-cream'>{`${profilecurrentuser?.firstName} ${profilecurrentuser?.lastName}`}</h2>
+                        <h3 className='text-left text-cream'>@{profilecurrentuser?.username}</h3>
+                        <p className='text-left text-cream'>{profilecurrentuser?.bio}</p>
+                        <p className='text-left text-cream'>Website: <span><a href={`${profilecurrentuser?.githubUrl}`}>{profilecurrentuser?.githubUrl}</a></span></p>
 
+                        {/**check here only */}
                         <div className='flex flex-row gap-3'>
                             <p className={`text-cream`}><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
                             <p className='text-cream'><span>{currnetuserfollowers?.length}</span>followers</p>
@@ -156,9 +91,9 @@ function ProfileComponent() {
 
             <div className='w-full flex flex-row gap-9 justify-center'>
                 <div className='w-1/2 flex gap-8 justify-center'>
-                    <Link to='/profile' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile"&&'text-cream'}`}>Posts</Link>
-                    <Link to='/profile/follower' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile/follower"&&'text-cream'}`}>Followers</Link>
-                    <Link to='/profile/following' className={`cursor-pointer font-semibold font-Inter ${location.pathname==="/profile/following"&&'text-cream'}`}>Following</Link>
+                    <Link to={`/profile/${profileId}`} className={`cursor-pointer font-semibold font-Inter ${location.pathname===`/profile/${profileId}`&&'text-cream'}`}>Posts</Link>
+                    <Link to={`/profile/${profileId}/follower`} className={`cursor-pointer font-semibold font-Inter ${location.pathname===(`/profile/${profileId}/follower`)&&'text-cream'}`}>Followers</Link>
+                    <Link to={`/profile/${profileId}/following`} className={`cursor-pointer font-semibold font-Inter ${location.pathname===(`/profile/${profileId}/following`)&&'text-cream'}`}>Following</Link>
                 </div>
             </div>
 

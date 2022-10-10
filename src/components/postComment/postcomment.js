@@ -1,60 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import PostmenuIcon from '../../assest/dots.png'
-
-import * as bookmarkActions from '../../actions/bookmark'
-import * as likedislike from '../../actions/likedislike'
-
 import { useParams } from 'react-router'
 
-
 function PostComment() {
-
     const { ...state } = useSelector(state => state)
     const { postId } = useParams()
-
     const dispatch = useDispatch()
-
-
-
-    const likeposts = (postId) => {
-        dispatch(likedislike?.likePost(postId, () => {
-            console.log('liking the post')
-        }))
-    }
-
-    const dislikepost = (postId) => {
-        dispatch(likedislike?.dislikePost(postId, () => {
-            console.log('disliking post')
-        }))
-    }
-
-    const addtobookmark = (postId) => {
-        dispatch(bookmarkActions?.addPostToBookMark(postId, () => {
-            console.log('adding post to bookmark')
-        }))
-    }
-
-    const removefrombookmark = (postId) => {
-        dispatch(bookmarkActions?.removePostFromBookMark(postId, () => {
-            console.log('removing post from bookmark')
-        }))
-    }
-
-
-    const handleShareClick = (postId) => {
-        window.navigator.clipboard.writeText(
-            `${window.location.origin}/post/${postId}`
-        );
-        console.log(`${window.location.origin}/post/${postId}`)
-    };
-
-
-
     return (
         <div className='singlepost'>
-
             hello comments now
             {/* <div className='w-full h-full'>
                 <div key={`${idx}`} className=''>

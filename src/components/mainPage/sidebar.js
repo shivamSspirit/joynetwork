@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { NavLink } from 'react-router-dom'
-
 import homeIcon from '../../assest/home.png'
 import eploreIcon from '../../assest/explore.png'
 import bookmark from '../../assest/saved.png'

@@ -18,7 +18,7 @@ function Header() {
                             <Link to="/explore" className="block mt-4 lg:inline-block lg:mt-0 text-large hover:text-blue mr-4 text-[16px] font-semibold">
                                posts
                             </Link>
-                            <Link to="/profile" className="block mt-4 lg:inline-block lg:mt-0 text-large hover:text-blue mr-4 text-[16px] font-semibold">
+                            <Link to="#profile" className="block mt-4 lg:inline-block lg:mt-0 text-large hover:text-blue mr-4 text-[16px] font-semibold">
                                profile
                             </Link>
                         </div>

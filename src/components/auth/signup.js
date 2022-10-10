@@ -35,9 +35,8 @@ function SignUp() {
     }
 
     return (
-
-        <div>
-            <div className='container flex h-screen w-screen items-center justify-center bg-blue'>
+        <div className='w-full bg-blue'>
+            <div className='container flex h-screen w-screen items-center justify-center'>
                 <div className='bg-cream w-1/4 flex flex-col items-center signup-height rounded-sm'>
                     <div className=''>
                         <h2 className=''>Signup to webapp</h2>

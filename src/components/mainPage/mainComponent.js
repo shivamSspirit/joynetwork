@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import CreatePost from '../post/createPost'
-import Suggestions from './suggestions'
-import { NavLink, useNavigate } from 'react-router-dom'
-
-import { useLocation } from 'react-router-dom'
-
-import { useParams } from 'react-router-dom'
+import { useParams,useLocation,NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import PostCard from '../post/postCard'
@@ -16,6 +10,8 @@ import * as authActions from '../../actions/auth'
 import * as authCookies from '../../utils/authUtils'
 import ModalforAction from '../modals/modal'
 
+import CreatePost from '../post/createPost'
+import Suggestions from './suggestions'
 import PostComment from '../postComment/postcomment'
 import SideBar from './sidebar'
 import { conforms } from 'lodash'
