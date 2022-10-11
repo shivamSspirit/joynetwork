@@ -2,7 +2,6 @@ import * as postApis from '../apis/post'
 
 export function createPost(data, callback) {
     return async (dispatch) => {
-        console.log('data',data)
         const response = await postApis?.postSinglePost(data);
         await dispatch(setpostsData(response?.data?.posts))
         if (callback) {
@@ -32,6 +31,18 @@ export function getallPostsForuser(data, callback) {
     }
 }
 
+export function getpaginatedPost(pagenum,callback){
+    return async (dispatch)=>{
+        const response = await postApis?.getpaginatedPost(pagenum);
+        console.log('res',response)
+        await dispatch(setpagedpostData(response?.data?.posts));
+
+        if(callback){
+            return callback()
+        }
+    }
+}
+
 
 
 
@@ -40,6 +51,13 @@ export function setpostsData(posts) {
         type: "SET_POSTS",
         posts
     };
+}
+
+export function setpagedpostData(pagedPosts){
+    return {
+        type:"SET_PAGED_POST",
+        pagedPosts
+    }
 }
 
 export function setPostsforSingleuser(userPosts) {

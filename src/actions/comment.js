@@ -1,4 +1,4 @@
- import * as commentApi from '../apis/comments'
+import * as commentApi from '../apis/comments'
 
 export function getAllcommentsforPost(data, callback) {
     return async (dispatch) => {

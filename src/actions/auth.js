@@ -4,20 +4,18 @@ import * as AuthUtils from '../utils/authUtils'
 export function register(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.register(data);
-		console.log('res from register', response)
 		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.createdUser?.username)
+		dispatch(setNewUser(response?.data?.createdUser))
 		if (callback) {
 			return callback();
 		}
 	};
 }
 
-
 export function login(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.login(data);
-		console.log('log', response)
 		AuthUtils?.saveAuthCookie(response?.data["encodedToken"])
 		AuthUtils?.saveUserCookie(response?.data?.foundUser?.username)
 		dispatch(setUserData(response?.data?.foundUser))
@@ -32,6 +30,12 @@ export function logout(){
 	window.location = '/auth/login'
 }
 
+export function setNewUser(newUser){
+	return {
+		type:"SET_NEW_USER",
+		newUser
+	}
+}
 
 
 export function setUserData(currentUser) {

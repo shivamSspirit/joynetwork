@@ -2,7 +2,6 @@ import axios from "axios";
 import * as authFeatures from '../utils/authUtils'
 
 const secondaryBaseUrl = '/api/posts'
-
 const authorization = authFeatures?.getAuthCookie()
 
 // public
@@ -40,7 +39,6 @@ export async function getAllpostFromuser(username) {
 // private
 
 export async function postSinglePost(postData) {
-    console.log( 'from api',postData )
     try {
         const response = await axios.post(`${secondaryBaseUrl}`, { postData }, { headers: { authorization: authFeatures?.getAuthCookie() } })
         console.log('res',response)
@@ -64,6 +62,17 @@ export async function deleteSinglepost(postID) {
 export async function editSinglePost(postID, postData) {
     try {
         const response = await axios.post(`${secondaryBaseUrl}/edit/${postID}`, { postData }, { headers: { authorization: authFeatures?.getAuthCookie() } })
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// paginated post
+
+export async function getpaginatedPost(pagenum){
+    try {
+        const response = await axios.post(`${secondaryBaseUrl}/${pagenum}`)
         return response
     } catch (error) {
         console.log(error)

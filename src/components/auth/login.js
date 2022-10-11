@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router';
 import * as authAction from '../../actions/auth'
 import { useDispatch, useSelect } from 'react-redux';
-import useLoginForm from '../../hoooks/useForm';
+import useLoginForm from '../../hoooks/authHooks/useForm';
 import { Link } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate()
     const formLogin = () => {
-        console.log("Callback function when form is submitted!");
         console.log("Form Values ", values);
     }
     const { values, errors, handleChange, asGuest } = useLoginForm(formLogin)
@@ -30,10 +29,10 @@ function Login() {
     }
 
     return (
-        <div>
-            <div className='container flex h-screen w-screen items-center justify-center'>
+        <div className='w-full bg-blue'>
+            <div className='container flex h-screen w-screen items-center justify-center overflow-scroll'>
 
-                <div className='bg-green w-1/4 h-1/3 flex flex-col items-center'>
+                <div className='bg-cream w-1/3 flex flex-col items-center rounded-sm'>
 
                     <div className=''>
                         <h2 className=''>Login to webapp</h2>
@@ -72,10 +71,7 @@ function Login() {
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     )
 }
 

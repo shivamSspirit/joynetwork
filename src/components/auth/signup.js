@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import useSignupForm from '../../hoooks/authHooks/useSignupform';
 
 function SignUp() {
-
     const formsignup = () => {
         console.log("Callback function when form is submitted!");
         console.log("Form Values ", values);
@@ -36,20 +35,14 @@ function SignUp() {
     }
 
     return (
-
-        <div>
+        <div className='w-full bg-blue'>
             <div className='container flex h-screen w-screen items-center justify-center'>
-
-                <div className='bg-green w-1/4 h-1/2 flex flex-col items-center'>
-
+                <div className='bg-cream w-1/4 flex flex-col items-center signup-height rounded-sm'>
                     <div className=''>
                         <h2 className=''>Signup to webapp</h2>
                         <p className='text-small text-center'>connect with people</p>
                     </div>
-
-
                     <form className="flex items-center flex-col" onSubmit={handleSubmit}>
-
                         <div className=''>
                             <label className="relative block text-left">
                                 FirstName:
@@ -95,20 +88,12 @@ function SignUp() {
 
                         <button type='submit' className='rounded-none'>Register</button>
                     </form>
-
-                    {/* 
-        <div className='guest-log items-center'>
-            <button onClick={(e) => asGuest(e)}>Login as a guest</button>
-        </div> */}
-
                     <div className='item-center'>
                         <span>already sign up?<Link to={'/auth/login'} style={{ textDecoration: "none", color: "inherit" }}>login here</Link></span>
                     </div>
                 </div>
             </div>
-
         </div>
-
     )
 }
 
