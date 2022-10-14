@@ -7,7 +7,7 @@ export async function register(data) {
 		const response =await axios.post(`${secondaryBaseUrl}/signup`, data)
 		return response;
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 	}
 }
 
@@ -16,7 +16,7 @@ export async function login(data) {
 		const response = await axios.post(`${secondaryBaseUrl}/login`, data)
 		return response
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 	}
 }
 

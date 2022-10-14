@@ -53,7 +53,7 @@ export async function addUpvoteToComment(postId, commentID) {
         const response = await axios.post(`${secondaryBaseUrl}/upvote/${postId}/${commentID}`, { headers: { authorization: authFeatures?.getAuthCookie() } })
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -64,6 +64,6 @@ export async function addDownvoteToComment(postId, commentID) {
         const response = await axios.post(`${secondaryBaseUrl}/downvote/${postId}/${commentID}`, { headers: { authorization: authFeatures?.getAuthCookie() } })
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }

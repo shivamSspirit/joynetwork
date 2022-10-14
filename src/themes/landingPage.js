@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/header/header'
 import MainComponent from '../components/mainPage/mainComponent'
+import { ToastContainer } from "react-toastify"
 
 function LandingPage() {
   return (

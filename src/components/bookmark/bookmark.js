@@ -4,6 +4,7 @@ import SinglePost from '../post/singlepostcard';
 
 function Bookmark() {
   const { bookmarkPosts } = useSelector(state => state?.bookmarkPostReducer);
+  console.log(bookmarkPosts)
   return (
     <div className='h-screen overflow-scroll'>
       <h2 className='text-center text-[22px]'>Bookmark post</h2>

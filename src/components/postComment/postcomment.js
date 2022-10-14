@@ -5,11 +5,11 @@ import { useParams } from 'react-router'
 function PostComment() {
     const { ...state } = useSelector(state => state)
     const { postId } = useParams()
-    const dispatch = useDispatch()
+   // const dispatch = useDispatch()
 
     useEffect(() => {
         if (postId) {
-            console.log(postId)
+            console.log("postId:",postId)
         }
     }, [postId])
     return (

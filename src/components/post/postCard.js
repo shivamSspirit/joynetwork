@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import SinglePost from './singlepostcard'
 
-function PostCard(props) {
+function PostCard() {
     const { ...state } = useSelector(state => state);
     return (
         <div className='w-full h-full'>

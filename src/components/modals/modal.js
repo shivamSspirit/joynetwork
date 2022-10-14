@@ -15,8 +15,6 @@ function ModalforAction(props) {
               </span>
             </div>
           </div>
-        
-
       )}
     </>
 

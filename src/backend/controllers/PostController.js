@@ -154,7 +154,7 @@ export const editPostHandler = function (schema, request) {
  * send POST Request at /api/posts/like/:postId
  * */
 
-export const likePostHandler = function (schema, request) {
+ export const likePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -170,19 +170,27 @@ export const likePostHandler = function (schema, request) {
     }
     const postId = request.params.postId;
     const post = schema.posts.findBy({ _id: postId }).attrs;
-    if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
+    if (post.likes.likedBy.some(({ _id }) => _id === user._id)) {
       return new Response(
         400,
         {},
-        { errors: ["Cannot like a post that is already liked. "] }
+        { errors: ["Cannot like a post that is already liked."] }
       );
     }
     post.likes.dislikedBy = post.likes.dislikedBy.filter(
-      (currUser) => currUser._id !== user._id
+      ({ _id }) => _id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push(user);
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+
+    const { _id, username, firstName, lastName } = user;
+    post.likes.likedBy.push({
+      _id,
+      username,
+      firstName,
+      lastName,
+      likeUpdateDate: formatDate(),
+    });
+    this.db.posts.update({ _id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -200,7 +208,7 @@ export const likePostHandler = function (schema, request) {
  * send POST Request at /api/posts/dislike/:postId
  * */
 
-export const dislikePostHandler = function (schema, request) {
+ export const dislikePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -223,7 +231,7 @@ export const dislikePostHandler = function (schema, request) {
         { errors: ["Cannot decrement like less than 0."] }
       );
     }
-    if (post.likes.dislikedBy.some((currUser) => currUser._id === user._id)) {
+    if (post.likes.dislikedBy.some(({ _id }) => _id === user._id)) {
       return new Response(
         400,
         {},
@@ -232,14 +240,19 @@ export const dislikePostHandler = function (schema, request) {
     }
     post.likes.likeCount -= 1;
     const updatedLikedBy = post.likes.likedBy.filter(
-      (currUser) => currUser._id !== user._id
+      ({ _id }) => _id !== user._id
     );
-    post.likes.dislikedBy.push(user);
-    post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
-   
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
 
-    console.log('posfrom dvbt',this.db.posts )
+    const { _id, username, firstName, lastName } = user;
+    post.likes.dislikedBy.push({
+      _id,
+      username,
+      firstName,
+      lastName,
+      likeUpdateDate: formatDate(),
+    });
+    post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
+    this.db.posts.update({ _id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(

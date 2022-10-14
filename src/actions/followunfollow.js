@@ -4,7 +4,7 @@ import * as followApis from '../apis/followUnfollow'
 export function followSomeone(data, callback) {
     return async (dispatch) => {
         const response = await followApis?.followAction(data);
-        await dispatch(setFollowers(response?.data?.user, response?.data?.followUser, response?.data?.followUser?.followers, response?.data?.user?.following))
+         dispatch(setFollowers(response?.data?.user, response?.data?.followUser, response?.data?.followUser?.followers, response?.data?.user?.following))
         if (callback) {
             return callback();
         }

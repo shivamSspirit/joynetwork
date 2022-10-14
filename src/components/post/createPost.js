@@ -17,12 +17,14 @@ function CreatePost() {
         await uploadFiles(e.target.files[0], setMediaURL, setOpa, setDeleteToken)
     }
 
-    const handlecreatePost = async(e) => {
+    console.log('statehere', state)
+
+    const handlecreatePost = async (e) => {
         e.preventDefault();
         let postData;
         if (mediaUrl || status) {
-            postData = {content:{status:status, postMedia:mediaUrl}}
-           await dispatch(postActions?.createPost(postData, () => {
+            postData = { content: { status: status, postMedia: mediaUrl } }
+             dispatch(postActions?.createPost(postData, () => {
                 console.log('createing post')
             }))
         }
@@ -41,7 +43,7 @@ function CreatePost() {
             <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream mt-3">
                 <div className='flex space-x-12'>
                     <div className="shrink-">
-                        <span className="h-12 w-12 rounded-full bg-gray-dark p-3">{state?.settings?.currentUser?.firstName ? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}` : `cxz`}</span>
+                        <span className="h-12 w-12 rounded-full bg-gray-dark"><img className='h-12 w-12 rounded-full' src={state?.settings?.currentUser?.profileImage?.url} /></span>
                     </div>
                     <div className='flex flex-col gap-3'>
                         <textarea value={status} onChange={(e) => handlepostContent(e)} placeholder='what is in your mind' className='w-80 h-32 outline-0 border-solid border-2 rounded-md' />

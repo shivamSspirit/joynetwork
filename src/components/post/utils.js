@@ -1,7 +1,7 @@
 // checking like status
 
-export const isLikedPost = (user,likes) => {
-    return likes?.likedBy?.some(({ username }) => username === user?.username)
+export const isLikedPost = (user, likes) => {
+    return likes?.likedBy?.some(({username }) => username === user?.username)
 }
 
 // checking bookmark status

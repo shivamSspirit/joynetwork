@@ -1,6 +1,7 @@
 import * as authApis from '../apis/auth'
 import * as AuthUtils from '../utils/authUtils'
 
+
 export function register(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.register(data);

@@ -8,7 +8,7 @@ export async function addpostTouserbookmark(postId){
         const response = await axios.post(`${secondaryBaseUrl}/bookmark/${postId}`,{},{ headers: { authorization: authFeatures?.getAuthCookie() } })
         return response;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -17,7 +17,7 @@ export async function removepostFromuserbookmark(postID){
         const response = await axios.post(`${secondaryBaseUrl}/remove-bookmark/${postID}`,{},{ headers: { authorization: authFeatures?.getAuthCookie() } })  
         return response 
     } catch (error) {
-       console.log(error) 
+       console.error(error) 
     }
 }
 

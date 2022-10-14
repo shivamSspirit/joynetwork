@@ -5,7 +5,6 @@ import homeIcon from '../../assest/home.png'
 import eploreIcon from '../../assest/explore.png'
 import bookmark from '../../assest/saved.png'
 import likeIcon from '../../assest/heart.png'
-// import PostCard from '../post/postCard'
 
 import * as authActions from '../../actions/auth'
 

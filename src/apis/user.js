@@ -26,6 +26,6 @@ export async function editUser(userData){
         const response = await axios.post(`${secondaryBaseUrl}/edit`,{userData},{headers:{authorization: authFeature?.getAuthCookie()}})
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
