@@ -2,6 +2,7 @@ import React from 'react'
 
 import Header from '../components/header/header'
 import Login from '../components/auth/login'
+import {ToastContainer} from "react-toastify"
 
 function LoginPage() {
   return (

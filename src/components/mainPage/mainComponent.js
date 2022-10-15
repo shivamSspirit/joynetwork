@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useParams,useLocation,NavLink, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import PostCard from '../post/postCard'
 
 import * as postActions from '../../actions/post'
 import * as userActions from '../../actions/user'
-import * as authActions from '../../actions/auth'
 import * as authCookies from '../../utils/authUtils'
 import ModalforAction from '../modals/modal'
 
@@ -14,9 +13,7 @@ import CreatePost from '../post/createPost'
 import Suggestions from './suggestions'
 import PostComment from '../postComment/postcomment'
 import SideBar from './sidebar'
-import { conforms } from 'lodash'
 import ExploreFedds from '../explorecompoents/explore'
-import Likes from '../likes/likes'
 import Bookmark from '../bookmark/bookmark'
 
 function MainComponent() {
@@ -30,10 +27,11 @@ function MainComponent() {
   const { users } = useSelector(state => state?.userReducer);
   const { likePosts } = useSelector(state => state?.likePostReducer);
   const location = useLocation()
-  const { ...postid } = useParams()
+  // const { postId } = useParams()
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
+  console.log('locations',location.pathname===`/post/${postId}`)
 
   useEffect(() => {
     if (!authCookies?.getAuthTokenKey()) {
@@ -72,7 +70,6 @@ function MainComponent() {
 
   useEffect(() => {
     if (currentUser) {
-      console.log('currentUser', currentUser)
       dispatch(postActions?.getallPostsForuser(currentUser?.username, () => {
         console.log('getting all post from user')
       }))
@@ -80,13 +77,17 @@ function MainComponent() {
   }, [currentUser, posts])
 
   useEffect(() => {
-    if (users) {
-      setAllusers(users)
-    }
     if (posts) {
       setUserPosts(posts)
     }
-  }, [users, posts])
+  }, [posts])
+
+
+  useEffect(()=>{
+    if (users) {
+      setAllusers(users)
+    }
+  },[users])
 
   // here components differenet from origgin location
 
@@ -102,7 +103,7 @@ function MainComponent() {
       )
     }
 
-    if (location.pathname === '/explore') {
+   if (location.pathname === '/explore') {
       return (
         <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
           <div className='h-full overflow-scroll'>
@@ -112,21 +113,22 @@ function MainComponent() {
       )
     }
 
-    if (location.pathname === '/likes') {
+  if (location.pathname = '/bookmarks') {
       return (
         <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
           <div className='h-full overflow-scroll'>
-            <Likes />
+            <Bookmark />
           </div>
         </div>
       )
     }
 
-    if (location.pathname = '/bookmarks') {
+   if (location.pathname === `/post/${postId}`) {
+      console.log("heloo status:",postId)
       return (
         <div className='flex flex-col gap-6 basis-1/2 sm:flex-grow overflow-scroll'>
           <div className='h-full overflow-scroll'>
-            <Bookmark />
+            <PostComment />
           </div>
         </div>
       )

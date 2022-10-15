@@ -71,7 +71,7 @@ function ProfileComponent() {
                     <div className='profile-side flex flex-col gap-2'>
                         <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
                         <h2 className='text-left text-cream'>{`${profilecurrentuser?.firstName} ${profilecurrentuser?.lastName}`}</h2>
-                        <h3 className='text-left text-cream'>@{profilecurrentuser?.username}</h3>
+                        <h3 className='text-left text-cream'>@{profilecurrentuser?.username&&profilecurrentuser?.username}</h3>
                         <p className='text-left text-cream'>{profilecurrentuser?.bio}</p>
                         <p className='text-left text-cream'>Website: <span><a href={`${profilecurrentuser?.githubUrl}`}>{profilecurrentuser?.githubUrl}</a></span></p>
 

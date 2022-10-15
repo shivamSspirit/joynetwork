@@ -7,8 +7,6 @@ function Suggestions({ users }) {
     const [followeduser, setFollowedUser] = useState()
     const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
 
-    // const { state } = useSelector(state => state?.userReducer)
-
     useEffect(() => {
         if (users) {
             setFollowedUser(users)
@@ -17,12 +15,10 @@ function Suggestions({ users }) {
 
     const followuser = (userId) => {
         dispatch(followActions?.followSomeone(userId, () => {
-            // setFollowedUser(users.filter(user => user?._id !== userId))
-            console.log('follw user')
+            console.log('follow user')
         }))
 
     }
-
     const unfollowUser = (userID) => {
         dispatch(followActions?.unfollowSomeone(userID, () => {
             console.log("unflowwing user")

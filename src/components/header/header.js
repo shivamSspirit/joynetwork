@@ -24,7 +24,7 @@ function Header() {
                         </div>
         
                         <div className='flex lg:flex-grow lg:justify-end lg:justify-items-end'>
-                            <Link to={'/profile'} className="items-center md:justify-center md:justify-items-center inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent  hover:bg-black hover:text-white mt-2 lg:mt-0 rounded-full">                              
+                            <Link to={`/auth/login`} className="items-center md:justify-center md:justify-items-center inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent  hover:bg-black hover:text-white mt-2 lg:mt-0 rounded-full">                              
                                 <h5 className='text-black hover:text-white text-[16px] font-semibold'>{state?.settings?.currentUser? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`: `creater`}</h5>       
                             </Link>
                         </div>

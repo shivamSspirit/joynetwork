@@ -3,7 +3,7 @@ import * as userApis from '../apis/user'
 export function getAllUsers(callback){
     return async (dispatch)=>{
         const response = await userApis?.getAllusers();
-        await dispatch(setusersData(response?.data?.users))
+        dispatch(setusersData(response?.data?.users))
         if(callback){
             return callback()
         }

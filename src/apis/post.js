@@ -41,7 +41,6 @@ export async function getAllpostFromuser(username) {
 export async function postSinglePost(postData) {
     try {
         const response = await axios.post(`${secondaryBaseUrl}`, { postData }, { headers: { authorization: authFeatures?.getAuthCookie() } })
-        console.log('res',response)
         return response
     } catch (error) {
         console.error(error)
@@ -53,7 +52,7 @@ export async function deleteSinglepost(postID) {
         const response = await axios.delete(`${secondaryBaseUrl}/${postID}`, { headers: { authorization: authFeatures?.getAuthCookie() } })
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -64,7 +63,7 @@ export async function editSinglePost(postID, postData) {
         const response = await axios.post(`${secondaryBaseUrl}/edit/${postID}`, { postData }, { headers: { authorization: authFeatures?.getAuthCookie() } })
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -75,6 +74,6 @@ export async function getpaginatedPost(pagenum){
         const response = await axios.post(`${secondaryBaseUrl}/${pagenum}`)
         return response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
