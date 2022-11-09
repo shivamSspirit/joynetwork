@@ -17,8 +17,6 @@ function CreatePost() {
         await uploadFiles(e.target.files[0], setMediaURL, setOpa, setDeleteToken)
     }
 
-    console.log('statehere', state)
-
     const handlecreatePost = async (e) => {
         e.preventDefault();
         let postData;
@@ -48,14 +46,12 @@ function CreatePost() {
                     <div className='flex flex-col gap-3'>
                         <textarea value={status} onChange={(e) => handlepostContent(e)} placeholder='what is in your mind' className='w-80 h-32 outline-0 border-solid border-2 rounded-md' />
                         <div className='icons flex space-x-3'>
-                            <span>
+                            <span className='h-8'>
                                 <label htmlFor="inputTag">
                                     <img className="h-6 w-6 rounded" src="/img/icon1.svg" alt="emoji" />
-                                    <input className='hidden' id="inputTag" type="file" onChange={handleimgFileChange} accept="image/*  video/*" />
+                                    <input className='opacity-0' id="inputTag" type="file" onChange={handleimgFileChange} accept="image/*  video/*" />
                                 </label>
                             </span>
-                            <img className="h-6 w-6 rounded" src="/img/emoji.png" alt="img" />
-
                         </div>
                         <button disabled={opa} onClick={handlecreatePost} className={`button bg-black rounded-md text-cream bg-slate-400 p-2 ${opa && "opacity-5"}`}>Create</button>
                     </div>

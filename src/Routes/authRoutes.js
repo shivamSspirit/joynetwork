@@ -3,7 +3,8 @@ import { getAuthCookie } from '../utils/authUtils';
 
 
 function AuthRoutes({ children }) {
-    const  authToken =getAuthCookie();
+    const authToken =getAuthCookie();
+    console.log('auth',authToken)
     const location = useLocation()
     return authToken ? <>{children}</> : <Navigate to={'/auth/login'} state={{ from: location }}/>
 }

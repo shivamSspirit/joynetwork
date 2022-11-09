@@ -17,6 +17,12 @@
 @tailwind utilities;
 
 @layer components {
+
+  #emojifiles{
+    display: none;
+  }
+
+
   .my-bg-image {
     background-image: url("/public/img/Vector.svg");
     background-repeat: no-repeat;

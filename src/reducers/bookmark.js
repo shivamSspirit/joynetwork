@@ -12,7 +12,6 @@ export const bookmarkPostReducer = (state = bookmark_posts_state, action) => {
             };
         }
 
-
         default:
             return state;
     }

@@ -1,13 +1,7 @@
-import { setpostsData } from "../actions/post";
 
 function useFiles() {
   const uploadFiles = async (media, setMediaURL, setOpa, setDeleteToken) => {
     const mediaType = media?.type?.split("/")[0];
-    //   if (mediaType === "video" && Math.round(media.size / 1024000) > 10)
-    //     toast.error("Video size should be less than 10MB");
-    //   else if (Math.round(media.size / 1024000) > 4)
-    //     toast.error("Image size should be less than 4MB");
-    //   else {
     const data = new FormData();
     data.append("file", media);
     data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_API_SECRET);
@@ -30,9 +24,7 @@ function useFiles() {
       })
       .catch((error) => {
         console.error(error);
-        // toast.error("Media Uploading failed");
       });
-    //   }
   };
 
   const deleteFiles = async (deleteToken, setMediaURL, setDeleteToken) => {

@@ -1,5 +1,6 @@
 import * as authApis from '../apis/auth'
 import * as AuthUtils from '../utils/authUtils'
+import * as followApis from '../apis/followUnfollow'
 
 
 export function register(data, callback) {
@@ -26,14 +27,34 @@ export function login(data, callback) {
 	}
 }
 
-export function logout(){
+export function followSomeone(data, callback) {
+	return async (dispatch) => {
+		const response = await followApis?.followAction(data);
+		dispatch(setUserData(response?.data?.user))
+		if (callback) {
+			return callback();
+		}
+	};
+}
+
+export function unfollowSomeone(data, callback) {
+    return async (dispatch) => {
+        const response = await followApis?.unfollowAction(data);
+        dispatch(setUserData(response?.data?.user))
+        if (callback) {
+            return callback();
+        }
+    }
+}
+
+export function logout() {
 	AuthUtils?.removeAuthCookie();
 	window.location = '/auth/login'
 }
 
-export function setNewUser(newUser){
+export function setNewUser(newUser) {
 	return {
-		type:"SET_NEW_USER",
+		type: "SET_NEW_USER",
 		newUser
 	}
 }

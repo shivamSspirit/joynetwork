@@ -10,7 +10,7 @@ import FollowersComponent from '../components/profile/Followers'
 import Follwingcomponent from '../components/profile/Following'
 import ExploreFedds from "../components/explorecompoents/explore";
 import Bookmark from "../components/bookmark/bookmark";
-
+import AuthRoutes from "./authRoutes";
 
 function AllRoutes() {
     return (
@@ -21,16 +21,13 @@ function AllRoutes() {
             </Helmet>
             <Router>
                 <Routes>
-                    <Route path="/" element={<LandingPage />}>
+                    <Route path="/" element={<AuthRoutes><LandingPage /></AuthRoutes>}>
                         <Route path="explore" element={<ExploreFedds />} />
                         <Route path="bookmarks" element={<Bookmark />} />
-                        {/* <Route path="post/:postId" element={<PostComment />} /> */}
-                        {/* <Route path=":postId" element={<PostComment />} />
-                        </Route> */}
                     </Route>
                     <Route exact path="/auth/login" element={<LoginPage />} />
                     <Route exact path="/auth/signup" element={<SignupPage />} />
-                    <Route exact path="/profile/:profileId/" element={<ProfilePage />} >
+                    <Route exact path="/profile/:profileId/" element={<AuthRoutes><ProfilePage /></AuthRoutes>}>
                         <Route path="follower" element={<FollowersComponent />} />
                         <Route path="following" element={<Follwingcomponent />} />
                     </Route>
