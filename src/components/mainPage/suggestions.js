@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import * as followActions from '../../actions/followunfollow'
+import * as followActions from '../../actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 function Suggestions({ users }) {
     const dispatch = useDispatch();
     const [followeduser, setFollowedUser] = useState()
-    const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
+    const { currentUser } = useSelector(state => state?.settings)
 
     useEffect(() => {
         if (users) {
@@ -34,7 +34,7 @@ function Suggestions({ users }) {
                         <p>show more-</p>
                     </div>
                     <ul className='flex flex-col gap-3'>
-                        {followeduser && followeduser?.map((user, id) => (
+                        {followeduser && followeduser.filter(user => user?._id !== currentUser?._id)?.map((user, id) => (
                             <li key={`${id}`}>
                                 <div className='flex flex-row space-x-3'>
                                     <div className="shrink-0">
@@ -45,7 +45,7 @@ function Suggestions({ users }) {
                                         <p>{user?.username}</p>
                                     </div>
                                     <div className='flex-none'>
-                                        {currentuserfollwowing?.find(user => user?._id === user?._id) ? <button onClick={() => unfollowUser(user?._id)}>UnFollow-</button>: <button onClick={() => followuser(user?._id)}>Follow+</button>}
+                                        {currentUser?.following?.some(({ _id }) => _id === user?._id) ? <button onClick={() => unfollowUser(user?._id)}>UnFollow-</button> : <button onClick={() => followuser(user?._id)}>Follow+</button>}
                                     </div>
                                 </div>
                             </li>

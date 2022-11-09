@@ -3,32 +3,40 @@ import SideBar from '../mainPage/sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useLocation,useParams } from 'react-router-dom'
-import {useModal} from '../../hoooks/useModal'
 
 import ProfileModal from '../modals/profileModal'
 import Followers from './Followers'
 import Following from './Following'
 import SinglePost from '../post/singlepostcard'
 
+import * as followunfollowActions from '../../actions/auth'
+
 function ProfileComponent() {
     const [currentposts, setcurrentposts] = useState([]);
+    const [profilemodal,setProfileModal] = useState(false)
     const { ...state } = useSelector(state => state);
     const location = useLocation();
     const [profilecurrentuser,setProfilecurenuser] = useState();
-    const { modal, setModal,modalOperation } = useModal()
-    const { currentuserfollwowing, currnetuserfollowers } = useSelector(state => state?.followerPostReducer)
     const {profileId} = useParams();
+    const dispatch = useDispatch();
 
 
     useEffect(()=>{
         if(profileId){
            setProfilecurenuser(state?.userReducer?.users?.find(user=>user?.profileImage?.original_filename===profileId))
         }
-    },[profileId])
+    },[profileId,profilecurrentuser])
 
     useEffect(() => {
        setcurrentposts([state?.postReducer?.posts?.find?.(post=>post?.profileImage?.original_filename===profileId)])
-    }, [profileId])
+    }, [profileId,profilecurrentuser])
+
+
+    const userfollowAction=(userId)=>{
+        dispatch(followunfollowActions?.followSomeone(userId,()=>{
+            console.log('follow this user')
+        }))
+    }
 
 
 
@@ -44,7 +52,7 @@ function ProfileComponent() {
                 </>
             )
         }
-        if(location.pathname.includes(`/profile/${profileId}/follower`)){
+        if(location.pathname===`/profile/${profileId}/follower`){
             return(
                 <>
                 <Followers/>
@@ -52,7 +60,7 @@ function ProfileComponent() {
             )
         }
 
-        if(location.pathname.includes(`/profile/${profileId}/following`)){
+        if(location.pathname===`/profile/${profileId}/following`){
             return(
                 <>
                 <Following/>
@@ -69,7 +77,7 @@ function ProfileComponent() {
                 <SideBar />
                 <div className='flex flex-row w-full justify-evenly h-full'>
                     <div className='profile-side flex flex-col gap-2'>
-                        <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src='/img/prio.png' />
+                        <img className='w-24 h-24 rounded-full border-green border-2' alt='profile-pic' src={profilecurrentuser?.profileImage?.url} />
                         <h2 className='text-left text-cream'>{`${profilecurrentuser?.firstName} ${profilecurrentuser?.lastName}`}</h2>
                         <h3 className='text-left text-cream'>@{profilecurrentuser?.username&&profilecurrentuser?.username}</h3>
                         <p className='text-left text-cream'>{profilecurrentuser?.bio}</p>
@@ -78,12 +86,12 @@ function ProfileComponent() {
                         {/**check here only */}
                         <div className='flex flex-row gap-3'>
                             <p className={`text-cream`}><span>{state?.postReducer?.userPosts?.length}</span>posts</p>
-                            <p className='text-cream'><span>{currnetuserfollowers?.length}</span>followers</p>
-                            <p className='text-cream'><span>{currentuserfollwowing?.length}</span>following</p>
+                            <p className='text-cream'><span>{1}</span>followers</p>
+                            <p className='text-cream'><span>{1}</span>following</p>
                         </div>
                     </div>
                     <div>
-                        <button onClick={() => modalOperation()} className='w-28 h-9 bg-gray-dark mt-6 text-white rounded-md'>Edit profile</button>
+                        {state?.settings?.currentUser?._id===profilecurrentuser?._id?<button onClick={() => setProfileModal(!profilemodal)} className='w-28 h-9 bg-gray-dark mt-6 text-white rounded-md'>Edit profile</button>:<button onClick={() => userfollowAction(profilecurrentuser?._id)} className='w-28 h-9 bg-gray-dark mt-6 text-white rounded-md'>Follow</button>}                      
                     </div>
                 </div>
             </div>
@@ -102,7 +110,7 @@ function ProfileComponent() {
                 {Returncomponentwithorigin()}
             </div>
             <div>
-            {modal===true ? <ProfileModal />:null}
+            {profilemodal===true ? <ProfileModal profilemodal={profilemodal} setProfileModal={setProfileModal}/> :null}
             </div>
         </div>
            

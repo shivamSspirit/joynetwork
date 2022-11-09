@@ -1,4 +1,5 @@
 import * as userApis from '../apis/user'
+import { setUserData } from './auth';
 
 export function getAllUsers(callback){
     return async (dispatch)=>{
@@ -8,6 +9,16 @@ export function getAllUsers(callback){
             return callback()
         }
     } 
+}
+
+export function editUserProfile(userdata,callback){
+    return async (dispatch)=>{
+        const response = await userApis?.editUser(userdata);
+        dispatch(setUserData(response?.data?.user));
+        if(callback){
+            return callback()
+        }
+    }
 }
 
 
