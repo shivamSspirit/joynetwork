@@ -4,11 +4,10 @@ import * as authAction from '../../actions/auth'
 import { useDispatch, useSelect } from 'react-redux';
 import useLoginForm from '../../hoooks/authHooks/useForm';
 import { Link } from 'react-router-dom';
-import { useToast } from '../../hoooks/useToasts';
+
 
 function Login() {
     const navigate = useNavigate();
-    const { showToast } = useToast();
     const formLogin = () => {
         console.log("Form Values ", values);
     }
@@ -22,10 +21,10 @@ function Login() {
                 authAction?.login({
                     username: values.username,
                     password: values.passsword,
+                },()=>{
+                    navigate('/')
                 })
             );
-            showToast("success", "user logged in")
-            navigate('/')
         } else {
             alert("There is an Error!");
         }

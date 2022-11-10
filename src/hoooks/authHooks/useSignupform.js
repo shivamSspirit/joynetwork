@@ -3,11 +3,10 @@ import { omit } from 'lodash';
 
 const useSignupForm = (Callback) => {
     const [values, setValues] = useState({
-        firstName:'',
-        lastName:'',
-        email:'',
-        password:'',
-        userName:''
+        firstName: '',
+        lastName: '',
+        password: '',
+        userName: ''
     });
     const [errors, setErrors] = useState({});
 
@@ -16,50 +15,35 @@ const useSignupForm = (Callback) => {
         switch (name) {
 
             case 'firstName':
-                if (!new RegExp('[A-Za-z0-9]').test(value)){
+                if (!new RegExp('[A-Za-z0-9]').test(value)) {
                     setErrors({
                         ...errors,
-                        firstName:'first name should be alphanumeric'
+                        firstName: 'first name should be alphanumeric'
                     })
                 }
                 break;
-              case 'lastName':
-             
-                if (!new RegExp('[A-Za-z0-9]').test(value)){
+            case 'lastName':
+
+                if (!new RegExp('[A-Za-z0-9]').test(value)) {
                     setErrors({
                         ...errors,
-                        lastName:'last name should be alphanumeric'
+                        lastName: 'last name should be alphanumeric'
                     })
                 }
                 break;
 
 
-                case 'userName':
+            case 'userName':
 
-                    if (!new RegExp('[A-Za-z0-9]').test(value)){
-                        setErrors({
-                            ...errors,
-                            userName:'user name should be alphanumeric'
-                        })
-                    }
-                    break;
-    
-              
-                
-            case 'email':
-                if (
-                    !new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value)
-                ) {
+                if (!new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value)) {
                     setErrors({
                         ...errors,
-                        email: 'Enter a valid email address'
+                        userName: 'user name should be email type'
                     })
-                } else {
-
-                    let newObj = omit(errors, "email");
-                    setErrors(newObj);
                 }
                 break;
+
+
             case 'password':
                 if (
                     !new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/).test(value)
@@ -87,19 +71,20 @@ const useSignupForm = (Callback) => {
         let name = event.target.name;
         let val = event.target.value;
         Validate(event, name, val);
+        
         //Let's set these values in state
 
-        if(name==="firstName"){
+        if (name === "firstName") {
             setValues({
                 ...values,
-                firstName:val
+                firstName: val
             })
         }
 
-        if(name==="lastName"){
+        if (name === "lastName") {
             setValues({
                 ...values,
-                lastName:val
+                lastName: val
             })
         }
 
@@ -110,12 +95,6 @@ const useSignupForm = (Callback) => {
             })
         }
 
-        if (name === "email") {
-            setValues({
-                ...values,
-                email: val
-            })
-        }
         if (name === 'password') {
             setValues({
                 ...values,
@@ -124,28 +103,11 @@ const useSignupForm = (Callback) => {
         }
     }
 
-    // const asGuest = (e) => {
-    //     e.preventDefault();
-    //     console.log('login as guest')
-    //     setValues({
-    //         username: "shivam@gmail.com".trim(),
-    //         passsword: "Pret@spirit3".trim()
-    //     });
-    // }
-
     return {
         values,
         errors,
         handleChange,
-        // asGuest
     }
 }
 
 export default useSignupForm
-
-
-
-
-
-// @VikramSanthalia
-// You can mail to us at admissions@neog.camp with subject: IMP | Want to become neoG 23 MA or TA

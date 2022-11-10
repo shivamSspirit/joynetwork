@@ -3,22 +3,19 @@ import React from 'react'
 function ModalforAction(props) {
   return (
     <>
-      {props.popup && (
-       
-          <div className="fixed inset-0  bg-pink bg-opacity-60 overflow-y-auto h-12 w-12" id="my-modal">
+      {props.openmodal && (
+          <div className="rounded-md absolute z-50 bg-white bg-opacity-100 h-14 w-20 right-4 top-14" id="my-modal">
             <div className='h-full w-full flex flex-col'>
               <span>
-                item1
+               Edit
               </span>
               <span>
-                item2
+                Delete
               </span>
             </div>
           </div>
       )}
     </>
-
-
   )
 }
 
