@@ -1,24 +1,31 @@
 import React from 'react'
+import * as postAction from '../../actions/post'
+import { useDispatch } from 'react-redux'
 
 function ModalforAction(props) {
+  const dispatch = useDispatch();
+
+  const deletePost = (postId) => {
+    dispatch(postAction?.deletePostbyid(postId, () => {
+      console.log('deleting post')
+    }))
+  }
+
   return (
     <>
-      {props.popup && (
-       
-          <div className="fixed inset-0  bg-pink bg-opacity-60 overflow-y-auto h-12 w-12" id="my-modal">
-            <div className='h-full w-full flex flex-col'>
-              <span>
-                item1
-              </span>
-              <span>
-                item2
-              </span>
-            </div>
+      {props.openmodal && (
+        <div className="rounded-md absolute z-50 bg-white bg-opacity-100 h-14 w-20 right-4 top-14" id="my-modal">
+          <div className='h-full w-full flex flex-col text-black'>
+            <span className='text-black hover:bg-black cursor-pointer hover:text-white'>
+              Edit
+            </span>
+            <span onClick={()=>{deletePost(props.postId)}} className='text-black hover:bg-black cursor-pointer hover:text-white'>
+              Delete
+            </span>
           </div>
+        </div>
       )}
     </>
-
-
   )
 }
 

@@ -34,19 +34,22 @@ export const signupHandler = function (schema, request) {
       _id,
       createdAt: formatDate(),
       updatedAt: formatDate(),
+      bio: "",
+      websiteUrl: "",
+      profileImage: null,
       username,
       password,
-      ...rest,
       followers: [],
       following: [],
       bookmarks: [],
+      ...rest,
+      profileBackgroundImage: null,
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(
       { _id, username },
       process.env.REACT_APP_JWT_SECRET
     );
-    this.db.users.insert(createdUser)
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(

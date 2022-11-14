@@ -117,7 +117,7 @@ function MainComponent() {
 
   return (
     <div className='w-full bg-sky-blue relative' >
-      <div className='flex flex-row w-full'>
+      <div className='flex flex-row w-full h-screen'>
         <SideBar />
         <>
           {ReturnComponentsfromorigin()}

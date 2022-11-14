@@ -41,7 +41,7 @@ function CreatePost() {
             <div className="p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream mt-3">
                 <div className='flex space-x-12'>
                     <div className="shrink-">
-                        <span className="h-12 w-12 rounded-full bg-gray-dark"><img className='h-12 w-12 rounded-full' src={state?.settings?.currentUser?.profileImage?.url} /></span>
+                        <span className="h-20 w-20 rounded-full bg-gray-dark">{state?.settings?.currentUser?.profileImage?.url?<img className='h-12 w-12 rounded-full' src={state?.settings?.currentUser?.profileImage?.url}/>:<p className='rounded-full p-3 h-15 w-15 bg-gray-dark text-white'>{state?.settings?.currentUser? `${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`:'cc'}</p>} </span>
                     </div>
                     <div className='flex flex-col gap-3'>
                         <textarea value={status} onChange={(e) => handlepostContent(e)} placeholder='what is in your mind' className='w-80 h-32 outline-0 border-solid border-2 rounded-md' />
