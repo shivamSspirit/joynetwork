@@ -63,6 +63,16 @@ export function getpaginatedPost(pagenum,callback){
     }
 }
 
+export function deletePostbyid(postID,callback){
+    return async(dispatch)=>{
+        const response = await postApis?.deleteSinglepost(postID);
+        dispatch(setpostsData(response?.data?.posts))
+        if(callback){
+            return callback()
+        }
+    }
+}
+
 
 export function setpostsData(posts) {
     return {

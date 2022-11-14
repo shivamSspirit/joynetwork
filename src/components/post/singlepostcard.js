@@ -15,14 +15,9 @@ function SinglePost(props) {
     const { ...state } = useSelector(state => state);
     const dispatch = useDispatch()
     const { bookmarkPosts } = useSelector(state => state?.bookmarkPostReducer)
-
-
-    const [openmodal,setOpenmodal] = useState(false)
-
-    // console.log('post',post?.username)
-    // console.log('curretnuser',state?.settings?.currentUser?.username)
-    // here check like status
+    const [openmodal, setOpenmodal] = useState(false)
     const isLiked = isLikedPost(state?.settings?.currentUser, post?.likes);
+
     // here check bookmark status
     const isBookmarked = isBookmarkedPost(post?._id, bookmarkPosts);
 
@@ -72,7 +67,7 @@ function SinglePost(props) {
                                     <p className='font-light'>@{post?.firstName}</p>
                                     <p>.1min</p>
                                 </span>
-                             {post?.username===state?.settings?.currentUser?.username&& <span onClick={()=>setOpenmodal(!openmodal)} className='flex justify-center items-center'><img id="open-btn" className='h-6 w-5 mb-4 cursor-pointer' src={Postmenuicon} alt='menu-icon' /></span>} 
+                                {post?.username === state?.settings?.currentUser?.username && <span onClick={() => setOpenmodal(!openmodal)} className='flex justify-center items-center'><img id="open-btn" className='h-6 w-5 mb-4 cursor-pointer' src={Postmenuicon} alt='menu-icon' /></span>}
                             </div>
                             <p className='text-left about post'>{post?.content?.content?.status}</p>
                             <div className='w-full h-full'>
@@ -80,24 +75,27 @@ function SinglePost(props) {
                             </div>
                         </div>
                         <div className='icons flex space-x-20'>
-                            <span>
-                                {isLiked ? <img onClick={() => { dislikepost(post?._id) }} className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" /> : <img onClick={() => { likeposts(post?._id) }} className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" />}
+                            <span className='flex gap-1'>
+                                <span>
+                                    {isLiked ? <img onClick={() => { dislikepost(post?._id) }} className="h-6 w-6 rounded" src="/img/filledheart.png" alt="ChitChat Logo" /> : <img onClick={() => { likeposts(post?._id) }} className="h-6 w-6 rounded" src="/img/heart.png" alt="ChitChat Logo" />}
+                                </span>
+                                <span className='text-[18px]'>{post?.likes?.likeCount}</span>
                             </span>
                             <span>
                                 {isBookmarked ? <img onClick={() => { removefrombookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" /> : <img onClick={() => { addtobookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" />}
                             </span>
-                            <span><Link to={`/post/${post?._id}`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link>
-
+                            <span className='flex gap-1'>
+                             <span>
+                             <Link to={`/post/${post?._id}`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link>
+                                </span> 
+                                <span className='text-[18px]'>{post?.comments?.length}</span>  
                             </span>
                             <img onClick={() => { handleShareClick() }} className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" />
                         </div>
                     </div>
                 </div>
-
-                <ModalforAction openmodal={openmodal} setOpenmodal={setOpenmodal} />
+                <ModalforAction postId={post?._id} openmodal={openmodal} setOpenmodal={setOpenmodal} />
             </div>
-
-           
         </>
     )
 }
