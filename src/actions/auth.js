@@ -20,7 +20,7 @@ export function login(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.login(data);
 		console.log('rs fromlogin',response)
-		AuthUtils?.saveAuthCookie(response?.data["encodedToken"])
+		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.foundUser?.username)
 		dispatch(setUserData(response?.data?.foundUser))
 		if (callback) {
