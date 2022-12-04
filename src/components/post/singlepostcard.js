@@ -86,7 +86,7 @@ function SinglePost(props) {
                             </span>
                             <span className='flex gap-1'>
                              <span>
-                             <Link to={`/post/${post?._id}`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link>
+                             <Link to={`#post/postId`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link>
                                 </span> 
                                 <span className='text-[18px]'>{post?.comments?.length}</span>  
                             </span>
