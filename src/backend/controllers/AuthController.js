@@ -70,7 +70,7 @@ export const signupHandler = function (schema, request) {
 
 export const loginHandler = function (schema, request) {
   const { username, password } = JSON.parse(request.requestBody);
-  console.log(username)
+  console.log(username,password)
   try {
     const foundUser = schema.users.findBy({ username: username });
     if (!foundUser) {
@@ -84,6 +84,7 @@ export const loginHandler = function (schema, request) {
         }
       );
     }
+    console.log('this yss',password === foundUser.password)
     if (password === foundUser.password) {
       const encodedToken = sign(
         { _id: foundUser._id, username },
