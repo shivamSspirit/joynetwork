@@ -12,6 +12,7 @@ export function isAuthCookiePresent() {
 	);
 }
 
+
 export function saveAuthCookie(cookieValue) {
 	cookies.set(AUTH_COOKIE_NAME, cookieValue);
 }
