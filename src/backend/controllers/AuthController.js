@@ -46,10 +46,8 @@ export const signupHandler = function (schema, request) {
       profileBackgroundImage: null,
     };
     const createdUser = schema.users.create(newUser);
-    const encodedToken = sign(
-      { _id, username },
-      process.env.REACT_APP_JWT_SECRET
-    );
+    const newData = {_id, username}
+    const encodedToken = sign(newData,process.env.REACT_APP_JWT_SECRET);
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(
@@ -70,7 +68,6 @@ export const signupHandler = function (schema, request) {
 
 export const loginHandler = function (schema, request) {
   const { username, password } = JSON.parse(request.requestBody);
-  console.log(username,password)
   try {
     const foundUser = schema.users.findBy({ username: username });
     if (!foundUser) {
@@ -84,13 +81,12 @@ export const loginHandler = function (schema, request) {
         }
       );
     }
-    console.log('this yss',password === foundUser.password)
     if (password === foundUser.password) {
       const encodedToken = sign(
         { _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET
       );
-      console.log("response",foundUser, encodedToken)
+      console.log("encode",encodedToken)
       return new Response(200, {}, { foundUser, encodedToken });
     }
     return new Response(
