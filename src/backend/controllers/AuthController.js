@@ -82,13 +82,10 @@ export const loginHandler = function (schema, request) {
       );
     }
     if (password === foundUser.password) {
-      console.log("is",foundUser._id,username)
-      console.log("secrest",process.env.REACT_APP_JWT_SECRET)
       const encodedToken = sign(
         { _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET
       );
-      console.log("encode",encodedToken)
       return new Response(200, {}, { foundUser, encodedToken });
     }
     return new Response(

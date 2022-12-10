@@ -14,7 +14,6 @@ export async function register(data) {
 export async function login(data) {
 	try {
 		const response = await axios.post(`${secondaryBaseUrl}/login`, data);
-		console.log("res",response)
 		return response
 	} catch (error) {
 		console.error(error)

@@ -2,7 +2,7 @@ import axios from "axios";
 import * as authFeatures from '../utils/authUtils'
 
 const secondaryBaseUrl = '/api/posts'
-const authorization = authFeatures?.getAuthCookie()
+
 
 // public
 

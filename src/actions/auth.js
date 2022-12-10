@@ -6,7 +6,6 @@ import * as followApis from '../apis/followUnfollow'
 export function register(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.register(data);
-		console.log('res register', response)
 		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.createdUser?.username)
 		dispatch(setNewUser(response?.data?.createdUser))
@@ -19,7 +18,6 @@ export function register(data, callback) {
 export function login(data, callback) {
 	return async (dispatch) => {
 		const response = await authApis.login(data);
-		console.log('rs fromlogin', response)
 		AuthUtils?.saveAuthCookie(response?.data?.encodedToken)
 		AuthUtils?.saveUserCookie(response?.data?.foundUser?.username)
 		dispatch(setUserData(response?.data?.foundUser))
