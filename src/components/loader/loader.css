@@ -1,0 +1,14 @@
+.main-loader{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.loader-container{
+    width: 100%;
+    background: transparent;
+    display: flex;
+    justify-content:center;
+    justify-items: center;
+    align-items: center;
+}

@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Joynetworks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Joynetworks is a Social Media App where you can share posts and learnings.
 
-## Available Scripts
+## How to run the app locally?
 
-In the project directory, you can run:
+```
+$ git clone https://github.com/shivamsoni00/joynetwork.git
+$ cd my-app
+$ npm install
+$ npm start
+```
 
-### `yarn start`
+## Screens in this project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Authentication (Login, Signup) Pages
+2. Profile Page
+3. Home Page
+4. Explore Page
+5. Bookmarks Page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features
+1. Authentication using JWT along with form validation for Login and Signup Pages. All the below features are present after login.
+2. User can create and delete the post.
+3. Image, text can be added to the Post.
+4. User can like or unlike any post.
+5. User can add or remove post from bookmarks.
+6. Home Page where user can see their posts and the posts of friends followed by user.
+7. Explore Page where all the posts will be visible.
+8. Bookmarks Page where all the posts bookmarked by user will be visible.
+9. User can follow or unfollow other users.
+10. Profile Page where user can edit their profile. It contains details like Account Creation Date, Avatar, Bio and Portfolio URL. User can edit the profile.
+11. User can view the profile of other users as well.
+12. User can share the link of post with others.
 
-### `yarn test`
+## Tech Stack and Tools
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. React + Redux Toolkit
+2. React Router v6
+3. Git For Version Control
+4. vercel for Deployment
+5. Cloudinary for Image Storage
 
-### `yarn build`
+## Live Link
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[joysnetwork](https://joynetwork-2per.vercel.app/)

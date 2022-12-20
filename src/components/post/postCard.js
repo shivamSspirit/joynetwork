@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import SinglePost from './singlepostcard'
+import Loader from '../loader/Loader'
 
 function PostCard() {
     const { ...state } = useSelector(state => state);
@@ -16,6 +17,7 @@ function PostCard() {
             && state?.postReducer?.userPosts?.map((post, id) => (
                 <SinglePost key={id} post={post} />
             ))}
+           {state?.postReducer?.loader&&<Loader/>}
         </div>
     )
 }

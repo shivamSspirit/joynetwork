@@ -1,7 +1,8 @@
 export const default_posts_state = {
     posts: [],
     userPosts: undefined,
-    pagedposts:[]
+    pagedposts:[],
+    loader:false
 };
 
 
@@ -31,6 +32,21 @@ export const postReducer = (state = default_posts_state, action) => {
 
             }
         }
+
+         case "SET_LOADER": {
+            return {
+                ...state,
+                loader: true
+            }
+        }
+
+        case "UNSET_LOADER": {
+            return {
+                ...state,
+                loader: false
+            }
+        }
+        
         default:
             return state;
     }

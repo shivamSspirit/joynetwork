@@ -1,10 +1,12 @@
 import * as postApis from '../apis/post'
 import * as likesApi from '../apis/likedislike'
+import * as loaderAction from './loaderaction'
+
 
 export function createPost(data, callback) {
     return async (dispatch) => {
         const response = await postApis?.postSinglePost(data);
-         dispatch(setpostsData(response?.data?.posts))
+        dispatch(setpostsData(response?.data?.posts))
         if (callback) {
             return callback();
         }
@@ -13,8 +15,10 @@ export function createPost(data, callback) {
 
 export function getAllPosts(callback) {
     return async (dispatch) => {
+        dispatch(loaderAction?.setloadingState())
         const response = await postApis?.getAllposts();
-         dispatch(setpostsData(response?.data?.posts))
+        dispatch(loaderAction?.unsetloadingState())
+        dispatch(setpostsData(response?.data?.posts))
         if (callback) {
             return callback()
         }
@@ -24,8 +28,10 @@ export function getAllPosts(callback) {
 
 export function getallPostsForuser(data, callback) {
     return async (dispatch) => {
+        dispatch(loaderAction?.setloadingState())
         const response = await postApis?.getAllpostFromuser(data);
-         dispatch(setPostsforSingleuser(response?.data?.posts))
+        dispatch(loaderAction?.unsetloadingState())
+        dispatch(setPostsforSingleuser(response?.data?.posts))
         if (callback) {
             return callback()
         }
@@ -53,21 +59,21 @@ export function dislikePost(data, callback) {
 }
 
 
-export function getpaginatedPost(pagenum,callback){
-    return async (dispatch)=>{
+export function getpaginatedPost(pagenum, callback) {
+    return async (dispatch) => {
         const response = await postApis?.getpaginatedPost(pagenum);
-         dispatch(setpagedpostData(response?.data?.posts));
-        if(callback){
+        dispatch(setpagedpostData(response?.data?.posts));
+        if (callback) {
             return callback()
         }
     }
 }
 
-export function deletePostbyid(postID,callback){
-    return async(dispatch)=>{
+export function deletePostbyid(postID, callback) {
+    return async (dispatch) => {
         const response = await postApis?.deleteSinglepost(postID);
         dispatch(setpostsData(response?.data?.posts))
-        if(callback){
+        if (callback) {
             return callback()
         }
     }
@@ -81,9 +87,9 @@ export function setpostsData(posts) {
     };
 }
 
-export function setpagedpostData(pagedPosts){
+export function setpagedpostData(pagedPosts) {
     return {
-        type:"SET_PAGED_POST",
+        type: "SET_PAGED_POST",
         pagedPosts
     }
 }

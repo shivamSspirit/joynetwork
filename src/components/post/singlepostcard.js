@@ -84,12 +84,12 @@ function SinglePost(props) {
                             <span>
                                 {isBookmarked ? <img onClick={() => { removefrombookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" /> : <img onClick={() => { addtobookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" />}
                             </span>
-                            <span className='flex gap-1'>
+                            {/* <span className='flex gap-1'>
                              <span>
-                             <Link to={`#post/postId`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link>
+                             {/* <Link to={`#post/postId`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link> 
                                 </span> 
                                 <span className='text-[18px]'>{post?.comments?.length}</span>  
-                            </span>
+                            </span> */}
                             <img onClick={() => { handleShareClick() }} className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" />
                         </div>
                     </div>

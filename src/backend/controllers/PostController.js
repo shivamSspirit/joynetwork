@@ -154,7 +154,7 @@ export const editPostHandler = function (schema, request) {
  * send POST Request at /api/posts/like/:postId
  * */
 
- export const likePostHandler = function (schema, request) {
+export const likePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -208,7 +208,7 @@ export const editPostHandler = function (schema, request) {
  * send POST Request at /api/posts/dislike/:postId
  * */
 
- export const dislikePostHandler = function (schema, request) {
+export const dislikePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -309,34 +309,9 @@ export const deletePostHandler = function (schema, request) {
   }
 };
 
- export const getPagedPosts = function (schema,request) {
-    const { pageNum } = request.params;
-    const latestpost =this.db.posts
-    const paginatedpost = latestpost.slice(0, pageNum * 2 + 2);
-    return new Response(200, {}, { posts: paginatedpost })
-  }
-
-
-// this is in controllers
-
-// export const getPagedVideos = function (schema,request) {
-//   const { pageNum } = request.params;
-//   // console.log('rew',request)
-//   const latestVideos =this.db.videos
-//   console.log('la',latestVideos)
-//   const paginatedVideos = latestVideos.slice(0, pageNum * 2 + 2);
-//   return new Response(200, {}, { videos: paginatedVideos })
-// }
-
-
-// this in context
-
-// useEffect(()=>{
-	// 	const fetchPagedVideos = async()=>{
-	// 		const response = await VideoApi?.getPagesVideos(2);
-	// 		if(response){
-	// 			console.log('datqa from paged',response?.data)
-	// 		}
-	// 	}
-	// 	fetchPagedVideos()
-	// },[])
+export const getPagedPosts = function (schema, request) {
+  const { pagedposts } = request.params;
+  const latestpost = this.db.posts
+  const paginatedpost = latestpost.filter(item=>item?._id).slice(0, Number(pagedposts));
+  return new Response(200, {}, { posts: paginatedpost })
+}
