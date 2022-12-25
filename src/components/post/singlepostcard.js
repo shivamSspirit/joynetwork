@@ -21,6 +21,7 @@ function SinglePost(props) {
     // here check bookmark status
     const isBookmarked = isBookmarkedPost(post?._id, bookmarkPosts);
 
+    
     const likeposts = (postId) => {
         dispatch(likeDislikes?.likePost(postId, () => {
             console.log('liking the post')
@@ -57,7 +58,7 @@ function SinglePost(props) {
             <div className="relative p-6 max-w-lg mx-auto bg-gray-600 rounded-xl shadow-lg flex bg-cream mt-3">
                 <div className='flex space-x-12'>
                     <div className="shrink-0">
-                        <span className="h-20 w-20 rounded-full bg-gray-dark">{post?.profileImage?.url ? <img className='h-12 w-12 rounded-full' src={post?.profileImage?.url} /> : <p className='rounded-full p-3 h-15 w-15 bg-gray-dark text-white'>{`${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`}</p>} </span>
+                        <span className="h-20 w-20 rounded-full bg-gray-dark">{post?.profileImage?.url||state?.settings?.currentUser?.profileImage?.url ? <img className='h-12 w-12 rounded-full' src={post?.profileImage?.url||state?.settings?.currentUser?.profileImage?.url} /> : <p className='rounded-full p-3 h-15 w-15 bg-gray-dark text-white'>{`${state?.settings?.currentUser?.firstName[0]}${state?.settings?.currentUser?.lastName[0]}`}</p>} </span>
                     </div>
                     <div className='flex flex-col gap-3'>
                         <div className=''>
@@ -84,12 +85,6 @@ function SinglePost(props) {
                             <span>
                                 {isBookmarked ? <img onClick={() => { removefrombookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/filledbokk.png" alt="ChitChat Logo" /> : <img onClick={() => { addtobookmark(post?._id) }} className="h-6 w-6 rounded" src="/img/bookmark.png" alt="ChitChat Logo" />}
                             </span>
-                            {/* <span className='flex gap-1'>
-                             <span>
-                             {/* <Link to={`#post/postId`}> <img className="h-6 w-6 rounded" src="/img/comment.png" alt="ChitChat Logo" /></Link> 
-                                </span> 
-                                <span className='text-[18px]'>{post?.comments?.length}</span>  
-                            </span> */}
                             <img onClick={() => { handleShareClick() }} className="h-6 w-6 rounded" src="/img/share.png" alt="ChitChat Logo" />
                         </div>
                     </div>
